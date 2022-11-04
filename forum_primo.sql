@@ -25,6 +25,10 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 
 -- Listage des données de la table forum_primo.categorie : ~0 rows (environ)
 /*!40000 ALTER TABLE `categorie` DISABLE KEYS */;
+INSERT INTO `categorie` (`id_categorie`, `nomCategorie`) VALUES
+	(1, 'Fanzines'),
+	(2, 'Podcasts'),
+	(3, 'Autre');
 /*!40000 ALTER TABLE `categorie` ENABLE KEYS */;
 
 -- Listage de la structure de la table forum_primo. post
@@ -43,6 +47,11 @@ CREATE TABLE IF NOT EXISTS `post` (
 
 -- Listage des données de la table forum_primo.post : ~0 rows (environ)
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` (`id_post`, `datePost`, `textePost`, `topic_id`, `user_id`) VALUES
+	(1, '2022-11-04 11:23:23', 'Bonsoir tout le monde !\r\nEst-ce que quelqu\'un voudrait échanger des fanzines ?\r\nJ\'ai quelques volumes rares d\'un fanzine norvégien dont je voudrais me débarrasser si ça intéresse du monde !', 1, 1),
+	(2, '2022-11-04 11:24:45', 'Mon imprimante fait de grandes traces bleues sur mes images, quelqu\'un saurait d\'où peut venir le problème ? Est-ce réparable ?\r\n', 2, 1),
+	(3, '2022-11-04 11:26:20', 'Bonjour tout le monde !\r\nJe viens de voir qu\'Ableton avait un site pas mal fait pour comprendre les rudiments de la MAO, si ça peut vous être utile pour de l\'habillage sonore\r\nhttps://learningmusic.ableton.com/index.html\r\nBonne journée à tous !', 3, 1),
+	(4, '2022-11-04 11:28:27', 'Hello tout le monde !\r\nJe manque un peu d\'idées culinairement parlant,\r\nEst-ce que vous auriez des bonnes recettes de quiche à partager ?\r\nMerci d\'avance', 4, 1);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 
 -- Listage de la structure de la table forum_primo. topic
@@ -62,6 +71,11 @@ CREATE TABLE IF NOT EXISTS `topic` (
 
 -- Listage des données de la table forum_primo.topic : ~0 rows (environ)
 /*!40000 ALTER TABLE `topic` DISABLE KEYS */;
+INSERT INTO `topic` (`id_topic`, `titreTopic`, `dateCreaTopic`, `verrouTopic`, `categorie_id`, `user_id`) VALUES
+	(1, 'Echanges de fanzines', '2022-11-04 11:21:00', 0, 1, 1),
+	(2, 'Problèmes d\'impression', '2022-11-04 11:21:41', 0, 1, 1),
+	(3, 'Tuto Ableton', '2022-11-04 11:21:59', 0, 2, 1),
+	(4, 'Vos meilleures recettes de quiche ?', '2022-11-04 11:22:20', 0, 3, 1);
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 
 -- Listage de la structure de la table forum_primo. user
@@ -76,6 +90,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- Listage des données de la table forum_primo.user : ~0 rows (environ)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`id_user`, `emailUser`, `mdpUser`, `pseudoUser`, `roleUser`) VALUES
+	(1, 'martin.grimbert@sogetec.fr', 'pamplemousse67', 'Martin Grimbert', 'Admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
