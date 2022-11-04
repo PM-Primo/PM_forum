@@ -31,50 +31,10 @@
         public function setId($id)
         {
                 $this->id = $id;
-
                 return $this;
         }
 
-        /**
-         * Get the value of title
-         */ 
-        public function getTitle()
-        {
-                return $this->title;
-        }
-
-        /**
-         * Set the value of title
-         *
-         * @return  self
-         */ 
-        public function setTitle($title)
-        {
-                $this->title = $title;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of user
-         */ 
-        public function getUser()
-        {
-                return $this->user;
-        }
-
-        /**
-         * Set the value of user
-         *
-         * @return  self
-         */ 
-        public function setUser($user)
-        {
-                $this->user = $user;
-
-                return $this;
-        }
-
+  
         public function getCreationdate(){
             $formattedDate = $this->creationdate->format("d/m/Y, H:i:s");
             return $formattedDate;
