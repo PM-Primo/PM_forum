@@ -6,10 +6,11 @@
     final class Topic extends Entity{
 
         private $id;
-        private $title;
+        private $titreTopic;
+        private $dateCreaTopic;
+        private $verrouTopic;
+        private $categorie;
         private $user;
-        private $creationdate;
-        private $closed;
 
         public function __construct($data){         
             $this->hydrate($data);        
@@ -18,9 +19,8 @@
         /**
          * Get the value of id
          */ 
-        public function getId()
-        {
-                return $this->id;
+        public function getId(){
+            return $this->id;
         }
 
         /**
@@ -28,40 +28,56 @@
          *
          * @return  self
          */ 
-        public function setId($id)
-        {
-                $this->id = $id;
-                return $this;
+        public function setId($id){
+            $this->id = $id;
+            return $this;
         }
 
-  
-        public function getCreationdate(){
-            $formattedDate = $this->creationdate->format("d/m/Y, H:i:s");
+        public function getTitreTopic(){
+            return $this->titreTopic;
+        }
+
+        public function setTitreTopic($nvTitre){
+            $this->textePost = $nvTitre;
+            return $this;
+        }
+
+        public function getDateCreaTopic(){
+            $formattedDate = $this->dateCreaTopic->format("d/m/Y, H:i:s");
             return $formattedDate;
         }
 
-        public function setCreationdate($date){
+        public function setDateCreaTopic($date){
             $this->creationdate = new \DateTime($date);
             return $this;
         }
 
-        /**
-         * Get the value of closed
-         */ 
-        public function getClosed()
-        {
-                return $this->closed;
+        public function getVerrouTopic(){
+            return $this->verrouTopic;
         }
 
-        /**
-         * Set the value of closed
-         *
-         * @return  self
-         */ 
-        public function setClosed($closed)
-        {
-                $this->closed = $closed;
-
-                return $this;
+        public function setVerrouTopic($nvEtat){
+            $this->textePost = $nvEtat;
+            return $this;
         }
+
+        public function getCategorie(){
+            return $this->categorie;
+        }
+
+        public function setCategorie($nvCat){
+            $this->categorie = $nvCat;
+            return $this;
+        }
+
+        public function getUser(){
+            return $this->user;
+        }
+
+        public function setUser($nvUser){
+            $this->textePost = $nvUser;
+            return $this;
+        }
+
     }
+?>
