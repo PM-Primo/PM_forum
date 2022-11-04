@@ -61,5 +61,11 @@
             $this->roleUser = $nvRole;
             return $this;
         }
+
+        //ToString
+        public function __toString()
+        {
+            return $this->pseudoUser;
+        }
     }
 ?>

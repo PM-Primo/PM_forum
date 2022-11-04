@@ -79,5 +79,11 @@
             return $this;
         }
 
+        //ToString
+        public function __toString()
+        {
+            return $this->titreTopic;
+        }
+
     }
 ?>
