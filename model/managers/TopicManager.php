@@ -3,7 +3,6 @@
     
     use App\Manager;
     use App\DAO;
-    use Model\Managers\TopicManager;
 
     class TopicManager extends Manager{
 
@@ -15,5 +14,18 @@
             parent::connect();
         }
 
+        public function listTopics($id){
+
+            $sql = "SELECT *
+                    FROM topic t 
+                    WHERE categorie_id = :id
+                    ORDER BY dateCreaTopic DESC ";
+
+            return $this->getMultipleResults(
+                DAO::select($sql,['id' => $id]), 
+                $this->className
+            );
+        }
 
     }
+?>

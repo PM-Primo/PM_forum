@@ -38,7 +38,7 @@
         }
 
         public function setTitreTopic($nvTitre){
-            $this->textePost = $nvTitre;
+            $this->titreTopic = $nvTitre;
             return $this;
         }
 
@@ -48,7 +48,7 @@
         }
 
         public function setDateCreaTopic($date){
-            $this->creationdate = new \DateTime($date);
+            $this->dateCreaTopic = new \DateTime($date);
             return $this;
         }
 
@@ -57,7 +57,7 @@
         }
 
         public function setVerrouTopic($nvEtat){
-            $this->textePost = $nvEtat;
+            $this->verrouTopic = $nvEtat;
             return $this;
         }
 
