@@ -75,7 +75,7 @@
         }
 
         public function setUser($nvUser){
-            $this->textePost = $nvUser;
+            $this->user = $nvUser;
             return $this;
         }
 

@@ -11,7 +11,7 @@ $categorie = $result["data"]['categorie'];
 <?php
 foreach($topics as $topic){
 
-    echo "<p>".$topic->getTitreTopic()."</p>";
+    echo "<p><a href='index.php?ctrl=forum&action=listPosts&id=".$topic->getId()."'>".$topic->getTitreTopic()."</a> - Date ".$topic->getDateCreaTopic()." - Auteur :  ".$topic->getUser()."</p>";
     
 }
 

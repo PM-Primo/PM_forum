@@ -54,5 +54,22 @@
 
         }
 
+        public function listPosts($id){
+
+            $topicManager = new TopicManager();
+            $postManager = new PostManager();
+            
+            $topic = $topicManager->findOneById($id);
+
+            return [
+                "view" => VIEW_DIR."forum/listPosts.php",
+                "data" => [
+                    "posts" => $postManager->listPosts($id),
+                    "topic" => $topic
+                ]
+            ];
+
+        }
+
 
     }
