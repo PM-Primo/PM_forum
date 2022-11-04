@@ -40,11 +40,15 @@
         public function listTopics($id){
 
             $topicManager = new TopicManager();
+            $categorieManager = new CategorieManager();
+            
+            $categorie = $categorieManager->findOneById($id);
 
             return [
                 "view" => VIEW_DIR."forum/listTopics.php",
                 "data" => [
-                    "topics" => $topicManager->listTopics($id)
+                    "topics" => $topicManager->listTopics($id),
+                    "categorie" => $categorie
                 ]
             ];
 
