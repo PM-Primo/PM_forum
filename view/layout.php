@@ -40,7 +40,7 @@
                         }
                         else{
                             ?>
-                            <a href="./view/security/login.php">Connexion</a>
+                            <a href="index.php?ctrl=security&action=loginForm">Connexion</a>
                             <a href="index.php?ctrl=security&action=addUserForm">Inscription</a>
                             <a href="index.php?ctrl=forum&action=listCategories">la liste des catégories</a>
                         <?php

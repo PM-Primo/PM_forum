@@ -26,11 +26,7 @@
         }
 
         public function addUserForm(){
-          
-            return [
-                "view" => VIEW_DIR."security/addUserForm.php",
-            ];
-        
+            return ["view" => VIEW_DIR."security/addUserForm.php"];
         }
 
         public function addUser(){
@@ -38,9 +34,11 @@
 
             $userManager->addUser();
 
-            return [
-                "view" => VIEW_DIR."security/addUserForm.php",
-            ];
+            return ["view" => VIEW_DIR."security/addUserForm.php"];
+        }
+
+        public function loginForm(){
+            return ["view" => VIEW_DIR."security/loginForm.php"];
         }
 
 

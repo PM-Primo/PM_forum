@@ -1,16 +1,10 @@
-<h1>Formulaire d'inscription</h1>
+<h1>Se connecter</h1>
 
-<form action="index.php?ctrl=security&action=addUser" method="post" class="formulaire">
+<form action="index.php?ctrl=security&action=login" method="post" class="formulaire">
     <p>
         <label>
             Adresse e-mail :
             <input type="text" name="emailUser" class="champ_txt">
-        </label>
-    </p>
-    <p>
-        <label>
-            Pseudo :
-            <input type="text" name="pseudoUser" class="champ_txt">
         </label>
     </p>
     <p>
