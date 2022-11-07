@@ -33,6 +33,16 @@
         
         }
 
+        public function addUser(){
+            $userManager = new UserManager();
+
+            $userManager->addUser();
+
+            return [
+                "view" => VIEW_DIR."security/addUserForm.php",
+            ];
+        }
+
 
     }
 ?>

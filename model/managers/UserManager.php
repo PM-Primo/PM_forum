@@ -15,17 +15,15 @@
             parent::connect();
         }
 
-        public function addUser(/* */){
+        public function addUser( ){
+            $emailUser = $_POST["emailUser"];
+            $pseudoUser = $_POST["pseudoUser"];
+            $mdpUser = $_POST["mdpUser"];
 
-            // $sql = "SELECT *
-            //         FROM topic t 
-            //         WHERE categorie_id = :id
-            //         ORDER BY dateCreaTopic DESC ";
+            $data=["emailUser"=>$emailUser,"pseudoUser"=>$pseudoUser,"mdpUser"=>$mdpUser];
 
-            // return $this->getMultipleResults(
-            //     DAO::select($sql,['id' => $id]), 
-            //     $this->className
-            // );
+            return $this->add($data);
+
         }
 
     }
