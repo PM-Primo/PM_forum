@@ -16,7 +16,7 @@
         <p>
             <label>
                 Mot de passe :
-                <input type="text" name="mdpUser" class="champ_txt">
+                <input type="password" name="mdpUser" class="champ_txt">
             </label>
         </p>
 
