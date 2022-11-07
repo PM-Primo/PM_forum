@@ -16,8 +16,9 @@
         }
 
         public function addUser( ){
-            $emailUser = $_POST["emailUser"];
-            $pseudoUser = $_POST["pseudoUser"];
+
+            $emailUser =  filter_input(INPUT_POST, "emailUser", FILTER_VALIDATE_EMAIL);
+            $pseudoUser =  filter_input(INPUT_POST, "pseudoUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $mdpUser = $_POST["mdpUser"];
 
             $data=["emailUser"=>$emailUser,"pseudoUser"=>$pseudoUser,"mdpUser"=>$mdpUser];
