@@ -15,5 +15,18 @@
             parent::connect();
         }
 
+        public function addUser(/* */){
+
+            // $sql = "SELECT *
+            //         FROM topic t 
+            //         WHERE categorie_id = :id
+            //         ORDER BY dateCreaTopic DESC ";
+
+            // return $this->getMultipleResults(
+            //     DAO::select($sql,['id' => $id]), 
+            //     $this->className
+            // );
+        }
+
     }
 ?>
