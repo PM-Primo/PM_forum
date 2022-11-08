@@ -81,21 +81,16 @@
 
             $newTopicId = $topicManager->addTopic();
 
-            header("Location:index.php?ctrl=forum&action=listPosts&id=".$newTopicId);
-        }
+            $this->redirectTo("forum", "listPosts", $newTopicId);
+        }   
 
 
-        public function addPost(){
+        public function addPost($id){
 
             $postManager = new PostManager();
-            $postId = $postManager->addPost();
-            $post = $postManager->findOneById($postId);
-            $topic = $post->getTopic();
-            $topicId = $topic->getId();
+            $postId = $postManager->addPost($id);
 
-
-            header("Location:index.php?ctrl=forum&action=listPosts&id=".$topicId);
-
+            $this->redirectTo("forum", "listPosts", $id);
         }
 
 
