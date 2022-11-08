@@ -41,6 +41,11 @@
             return ["view" => VIEW_DIR."security/loginForm.php"];
         }
 
+        public function login(){
+            $userManager = new UserManager();
+            
+        }
+
 
     }
 ?>

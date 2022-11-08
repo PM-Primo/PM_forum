@@ -20,11 +20,13 @@
             $emailUser =  filter_input(INPUT_POST, "emailUser", FILTER_VALIDATE_EMAIL);
             $pseudoUser =  filter_input(INPUT_POST, "pseudoUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $mdpUser = $_POST["mdpUser"];
-            $mdpHash = password_hash($mdpUser, PASSWORD_DEFAULT);
-
-            $data=["emailUser"=>$emailUser,"pseudoUser"=>$pseudoUser,"mdpUser"=>$mdpHash];
-
-            return $this->add($data);
+            $mdpUser2 = $_POST["mdpUser2"];
+            
+            if($emailUser && $pseudoUser && $mdpUser){
+                $mdpHash = password_hash($mdpUser, PASSWORD_DEFAULT);
+                $data=["emailUser"=>$emailUser,"pseudoUser"=>$pseudoUser,"mdpUser"=>$mdpHash];
+                return $this->add($data);
+            }
 
         }
 

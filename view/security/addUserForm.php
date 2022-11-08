@@ -3,20 +3,26 @@
 <form action="index.php?ctrl=security&action=addUser" method="post" class="formulaire">
     <p>
         <label>
-            Adresse e-mail :
+            Adresse e-mail :<br>
             <input type="text" name="emailUser" class="champ_txt">
         </label>
     </p>
     <p>
         <label>
-            Pseudo :
+            Pseudo :<br>
             <input type="text" name="pseudoUser" class="champ_txt">
         </label>
     </p>
     <p>
         <label>
-            Mot de passe :
+            Mot de passe :<br>
             <input type="password" name="mdpUser" class="champ_txt">
+        </label>
+    </p>
+    <p>
+        <label>
+            Confirmer le mot de passe :<br>
+            <input type="password" name="mdpUser2" class="champ_txt">
         </label>
     </p>
 
