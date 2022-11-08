@@ -41,7 +41,9 @@
 
                 $postManager = new PostManager;
                 $dataFirstPost=["textePost"=>$texte,"topic_id"=>$newTopicId, "user_id"=>$userId];
-                return $postManager->add($dataFirstPost);
+                $postManager->add($dataFirstPost);
+
+                return $newTopicId;
 
             }
 

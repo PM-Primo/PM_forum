@@ -13,7 +13,11 @@ $catId=$categorie->getId();
 
 <?php
 foreach($topics as $topic){
-    echo "<p><a href='index.php?ctrl=forum&action=listPosts&id=".$topic->getId()."'>".$topic->getTitreTopic()."</a> - Date ".$topic->getDateCreaTopic()." - Auteur :  ".$topic->getUser()."</p>";
+    echo "<p><a href='index.php?ctrl=forum&action=listPosts&id=".$topic->getId()."'>".$topic->getTitreTopic()."</a>";
+    if ($topic->getVerrouTopic()){
+        echo " [VERROUILLÉ]";
+    } 
+    echo " - Date ".$topic->getDateCreaTopic()." - Auteur :  ".$topic->getUser()."</p>";
 }
 
 ?>

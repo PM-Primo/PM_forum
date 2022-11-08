@@ -79,19 +79,22 @@
 
             $topicManager = new TopicManager();
 
-            $topicManager->addTopic();
+            $newTopicId = $topicManager->addTopic();
 
-            return ["view" => VIEW_DIR."home.php"];
+            header("Location:index.php?ctrl=forum&action=listPosts&id=".$newTopicId);
         }
 
 
         public function addPost(){
 
             $postManager = new PostManager();
+            $postId = $postManager->addPost();
+            $post = $postManager->findOneById($postId);
+            $topic = $post->getTopic();
+            $topicId = $topic->getId();
 
-            $postManager->addPost();
 
-            return ["view" => VIEW_DIR."home.php"];
+            header("Location:index.php?ctrl=forum&action=listPosts&id=".$topicId);
 
         }
 
