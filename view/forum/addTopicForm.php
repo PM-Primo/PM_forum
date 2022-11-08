@@ -6,13 +6,13 @@
     <p>
         <label>
             Titre du topic :<br>
-            <input type="text" name="titreTopic" class="champ_txt">
+            <input type="text" name="titreTopic" class="champ_txt" required>
         </label>
     </p>
     <p>
         <label>
             Message :<br>
-            <textarea name="texteFirstPost" rows="5" cols="33"></textarea>        
+            <textarea name="texteFirstPost" rows="5" cols="33" required></textarea>        
         </label>
     </p>
 

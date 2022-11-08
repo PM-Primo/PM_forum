@@ -21,14 +21,42 @@
             $pseudoUser =  filter_input(INPUT_POST, "pseudoUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $mdpUser = $_POST["mdpUser"];
             $mdpUser2 = $_POST["mdpUser2"];
-            
+
+
             if($emailUser && $pseudoUser && $mdpUser){
-                $mdpHash = password_hash($mdpUser, PASSWORD_DEFAULT);
-                $data=["emailUser"=>$emailUser,"pseudoUser"=>$pseudoUser,"mdpUser"=>$mdpHash];
-                return $this->add($data);
+
+                //On vérifie si l'e-mail n'existe pas déjà
+                $sql = "SELECT *
+                FROM user u 
+                WHERE emailUser = :email";
+        
+                $checkEmail = $this->getMultipleResults(
+                    DAO::select($sql,['email' => $emailUser]), 
+                    $this->className
+                );
+                
+                if(!$checkEmail){
+
+                    //On vérifie si le pseudo n'existe pas déjà 
+                    $sql = "SELECT *
+                        FROM user u 
+                        WHERE pseudoUser = :pseudo";
+            
+                    $checkPseudo = $this->getMultipleResults(
+                    DAO::select($sql,['pseudo' => $pseudoUser]), 
+                    $this->className
+                    );
+
+                    if(!$checkPseudo){
+
+                        if ($mdpUser == $mdpUser2){ //on vérifie que les 2 mots de passe sont identiques
+                            $mdpHash = password_hash($mdpUser, PASSWORD_DEFAULT);
+                            $data=["emailUser"=>$emailUser,"pseudoUser"=>$pseudoUser,"mdpUser"=>$mdpHash];
+                            return $this->add($data);
+                        }
+                    }
+                }
             }
-
         }
-
     }
 ?>

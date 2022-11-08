@@ -24,7 +24,7 @@ if(!$verrouTopic){?>
     <p>
         <label>
             Message :<br>
-            <textarea name="textePost" rows="5" cols="45"></textarea>        
+            <textarea name="textePost" rows="5" cols="45" required></textarea>        
         </label>
     </p>
 

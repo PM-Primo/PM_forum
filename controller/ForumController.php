@@ -93,6 +93,5 @@
             $this->redirectTo("forum", "listPosts", $id);
         }
 
-
     }
 ?>

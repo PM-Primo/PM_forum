@@ -4,25 +4,25 @@
     <p>
         <label>
             Adresse e-mail :<br>
-            <input type="text" name="emailUser" class="champ_txt">
+            <input type="text" name="emailUser" class="champ_txt" required>
         </label>
     </p>
     <p>
         <label>
             Pseudo :<br>
-            <input type="text" name="pseudoUser" class="champ_txt">
+            <input type="text" name="pseudoUser" class="champ_txt" required>
         </label>
     </p>
     <p>
         <label>
             Mot de passe :<br>
-            <input type="password" name="mdpUser" class="champ_txt">
+            <input type="password" name="mdpUser" class="champ_txt" minlength="8" required>
         </label>
     </p>
     <p>
         <label>
             Confirmer le mot de passe :<br>
-            <input type="password" name="mdpUser2" class="champ_txt">
+            <input type="password" name="mdpUser2" class="champ_txt" minlength="8" required>
         </label>
     </p>
 
