@@ -4,13 +4,13 @@
     <p>
         <label>
             Adresse e-mail :
-            <input type="text" name="emailUser" class="champ_txt">
+            <input type="text" name="emailUser" class="champ_txt" required>
         </label>
     </p>
     <p>
         <label>
             Mot de passe :
-            <input type="password" name="mdpUser" class="champ_txt">
+            <input type="password" name="mdpUser" class="champ_txt" required>
         </label>
     </p>
 

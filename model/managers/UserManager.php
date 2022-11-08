@@ -15,12 +15,12 @@
             parent::connect();
         }
 
-        public function addUser( ){
+        public function addUser(){
 
             $emailUser =  filter_input(INPUT_POST, "emailUser", FILTER_VALIDATE_EMAIL);
             $pseudoUser =  filter_input(INPUT_POST, "pseudoUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $mdpUser = $_POST["mdpUser"];
-            $mdpUser2 = $_POST["mdpUser2"];
+            $mdpUser = filter_input(INPUT_POST, "mdpUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $mdpUser2 = filter_input(INPUT_POST, "mdpUser2", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 
             if($emailUser && $pseudoUser && $mdpUser){
@@ -30,7 +30,7 @@
                 FROM user u 
                 WHERE emailUser = :email";
         
-                $checkEmail = $this->getMultipleResults(
+                $checkEmail = $this->getOneOrNullResult(
                     DAO::select($sql,['email' => $emailUser]), 
                     $this->className
                 );
@@ -42,7 +42,7 @@
                         FROM user u 
                         WHERE pseudoUser = :pseudo";
             
-                    $checkPseudo = $this->getMultipleResults(
+                    $checkPseudo = $this->getOneOrNullResult(
                     DAO::select($sql,['pseudo' => $pseudoUser]), 
                     $this->className
                     );
@@ -58,5 +58,37 @@
                 }
             }
         }
+
+        public function login(){
+
+            $emailUser =  filter_input(INPUT_POST, "emailUser", FILTER_VALIDATE_EMAIL);
+            $mdpUser = filter_input(INPUT_POST, "mdpUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            if($emailUser && $mdpUser){
+
+                //On vérifie que l'e-mail est bien dans la base de données
+                $sql = "SELECT *
+                FROM user u 
+                WHERE emailUser = :email";
+        
+                $user = $this->getOneOrNullResult(
+                    DAO::select($sql,['email' => $emailUser]), 
+                    $this->className
+                );
+
+                var_dump($user->getId());
+                echo"<br>";
+                var_dump($user->getEmailUser());
+                die;
+
+                if($user){
+                    //On vérifie que le mot de passe est bien celui associé au mail
+
+                }
+
+            }
+
+        }
+
     }
 ?>

@@ -87,11 +87,15 @@
 
         public function addPost($id){
 
-            $postManager = new PostManager();
-            $postId = $postManager->addPost($id);
+            $texte = filter_input(INPUT_POST, "textePost", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $userId = 1;
 
-            $this->redirectTo("forum", "listPosts", $id);
+            if($id && $texte && $userId){
+                $postManager = new PostManager();
+                $data=["textePost"=>$texte,"topic_id"=>$id, "user_id"=>$userId];
+                $postManager->add($data);
+                $this->redirectTo("forum", "listPosts", $id);
+            }
         }
-
     }
 ?>

@@ -43,6 +43,7 @@
 
         public function login(){
             $userManager = new UserManager();
+            $userManager->login();
         }
 
 
