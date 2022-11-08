@@ -28,5 +28,20 @@
             );
         }
 
+        public function addPost(){
+            
+            $topicId = $_GET["id"];
+            $texte = filter_input(INPUT_POST, "textePost", FILTER_SANITIZE_FULL_SPECIAL_CHARS).
+            $userId = 1;
+
+            if($topicId && $texte && $userId){
+                $data=["textePost"=>$texte,"topic_id"=>$topicId, "user_id"=>$userId];
+                return $this->add($data);
+            }
+
+        }
+
+
+
     }
 ?>

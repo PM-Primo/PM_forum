@@ -71,6 +71,30 @@
 
         }
 
+        public function addTopicForm(){
+            return ["view" => VIEW_DIR."forum/addTopicForm.php"];
+        }
+
+        public function addTopic(){
+
+            $topicManager = new TopicManager();
+
+            $topicManager->addTopic();
+
+            return ["view" => VIEW_DIR."home.php"];
+        }
+
+
+        public function addPost(){
+
+            $postManager = new PostManager();
+
+            $postManager->addPost();
+
+            return ["view" => VIEW_DIR."home.php"];
+
+        }
+
 
     }
 ?>
