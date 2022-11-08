@@ -77,10 +77,22 @@
 
         public function addTopic(){
 
-            $topicManager = new TopicManager();
+            $catId = $_GET["id"];
+            $titre = filter_input(INPUT_POST, "titreTopic", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $texte = filter_input(INPUT_POST, "texteFirstPost", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $userId = 1;
 
-            $newTopicId = $topicManager->addTopic();
 
+            if($catId && $titre && $userId && $texte){
+
+                $topicManager = new TopicManager;
+                $dataTopic=["titreTopic"=>$titre,"categorie_id"=>$catId, "user_id"=>$userId];
+                $newTopicId = $topicManager->add($dataTopic);
+
+                $postManager = new PostManager;
+                $dataFirstPost=["textePost"=>$texte,"topic_id"=>$newTopicId, "user_id"=>$userId];
+                $postManager->add($dataFirstPost);
+            }
             $this->redirectTo("forum", "listPosts", $newTopicId);
         }   
 
@@ -94,8 +106,8 @@
                 $postManager = new PostManager();
                 $data=["textePost"=>$texte,"topic_id"=>$id, "user_id"=>$userId];
                 $postManager->add($data);
-                $this->redirectTo("forum", "listPosts", $id);
             }
+            $this->redirectTo("forum", "listPosts", $id);
         }
     }
 ?>
