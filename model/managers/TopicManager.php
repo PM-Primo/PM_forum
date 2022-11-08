@@ -26,11 +26,5 @@
                 $this->className
             );
         }
-
-        public function addTopic(){
-           //Rien normalement
-           
-
-        }
     }
 ?>
