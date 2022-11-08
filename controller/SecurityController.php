@@ -56,8 +56,18 @@
         }
 
         public function login(){
-            $userManager = new UserManager();
-            $userManager->login();
+            $emailUser =  filter_input(INPUT_POST, "emailUser", FILTER_VALIDATE_EMAIL);
+            $mdpUser = filter_input(INPUT_POST, "mdpUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            if($emailUser && $mdpUser){
+
+                $userManager = new UserManager();
+
+                //On vérifie que l'e-mail est bien dans la base de données
+                if($userManager->getOneByEmail($emailUser)){
+                    //REPRISE ICI 
+                };
+            }
         }
 
 
