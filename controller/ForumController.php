@@ -5,8 +5,8 @@
     use App\Session;
     use App\AbstractController;
     use App\ControllerInterface;
-use DateTime;
-use Model\Managers\TopicManager;
+    use DateTime;
+    use Model\Managers\TopicManager;
     use Model\Managers\CategorieManager;
     use Model\Managers\PostManager;
     
@@ -25,6 +25,7 @@ use Model\Managers\TopicManager;
         
         }
 
+        //Appel de la liste des catégories
         public function listCategories(){
 
             $categorieManager = new CategorieManager();
@@ -38,6 +39,7 @@ use Model\Managers\TopicManager;
 
         }
 
+        //Appel de la liste des topics d'une catégorie précise ($id)
         public function listTopics($id){
 
             $topicManager = new TopicManager();
@@ -55,6 +57,7 @@ use Model\Managers\TopicManager;
 
         }
 
+        //Appel de la liste des posts d'un Topic précis ($id)
         public function listPosts($id){
 
             $topicManager = new TopicManager();
@@ -72,10 +75,12 @@ use Model\Managers\TopicManager;
 
         }
 
+        //Appel du formulaire d'ajout de topics
         public function addTopicForm(){
             return ["view" => VIEW_DIR."forum/addTopicForm.php"];
         }
 
+        //Ajout d'un topic & du premier message à la suite de l'utilisation du formulaire
         public function addTopic(){
 
             $catId = $_GET["id"];
@@ -97,7 +102,7 @@ use Model\Managers\TopicManager;
             $this->redirectTo("forum", "listPosts", $newTopicId);
         }   
 
-
+        //Ajout d'un post à la suite d'un topic précis ($id)
         public function addPost($id){
 
             $texte = filter_input(INPUT_POST, "textePost", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -113,6 +118,7 @@ use Model\Managers\TopicManager;
             $this->redirectTo("forum", "listPosts", $id);
         }
 
+        //Appel du formulaire d'édition d'un post($id)
         public function editPostForm($id){
 
             $postManager = new PostManager();
@@ -126,6 +132,7 @@ use Model\Managers\TopicManager;
             ];
         }
 
+        //Edition d'un post ($id) à la suite de l'emploi du formulaire
         public function editPost($id){
             
             $postManager = new PostManager();
@@ -133,6 +140,14 @@ use Model\Managers\TopicManager;
             $data=["textePost" => $nvTexte];
             $postManager->update($id, $data);
             $idTopic=$postManager->findOneById($id)->getTopic()->getId();
+            $this->redirectTo("forum", "listPosts", $idTopic);
+        }
+
+        //Suppression d'un post ($id)
+        public function deletePost($id){
+            $postManager = new PostManager();
+            $idTopic=$postManager->findOneById($id)->getTopic()->getId();
+            $postManager->delete($id);
             $this->redirectTo("forum", "listPosts", $idTopic);
         }
     }

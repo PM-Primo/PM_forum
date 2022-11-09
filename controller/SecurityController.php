@@ -25,10 +25,12 @@
         
         }
 
+        //Appel du formulaire d'inscription
         public function addUserForm(){
             return ["view" => VIEW_DIR."security/addUserForm.php"];
         }
 
+        //Inscription d'un nouvel utilisateur
         public function addUser(){
 
             $emailUser =  filter_input(INPUT_POST, "emailUser", FILTER_VALIDATE_EMAIL);
@@ -51,10 +53,12 @@
             return ["view" => VIEW_DIR."security/addUserForm.php"];
         }
 
+        //Appel du formulaire de login
         public function loginForm(){
             return ["view" => VIEW_DIR."security/loginForm.php"];
         }
-
+        
+        //login
         public function login(){
             $emailUser =  filter_input(INPUT_POST, "emailUser", FILTER_VALIDATE_EMAIL);
             $mdpUser = filter_input(INPUT_POST, "mdpUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -79,6 +83,7 @@
             }
         }
 
+        //logout
         public function logout(){
             $_SESSION["user"]=null;
             return ["view" => VIEW_DIR."home.php"];
