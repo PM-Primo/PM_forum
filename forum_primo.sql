@@ -44,9 +44,9 @@ CREATE TABLE IF NOT EXISTS `post` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `FK_post_topic` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id_topic`),
   CONSTRAINT `FK_post_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table forum_primo.post : ~5 rows (environ)
+-- Listage des données de la table forum_primo.post : ~6 rows (environ)
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
 INSERT INTO `post` (`id_post`, `datePost`, `textePost`, `topic_id`, `user_id`) VALUES
 	(1, '2022-11-04 11:23:23', 'Bonsoir tout le monde !\r\nEst-ce que quelqu\'un voudrait échanger des fanzines ?\r\nJ\'ai quelques volumes rares d\'un fanzine norvégien dont je voudrais me débarrasser si ça intéresse du monde !', 1, 1),
@@ -54,7 +54,9 @@ INSERT INTO `post` (`id_post`, `datePost`, `textePost`, `topic_id`, `user_id`) V
 	(3, '2022-11-04 11:26:20', 'Bonjour tout le monde !\r\nJe viens de voir qu\'Ableton avait un site pas mal fait pour comprendre les rudiments de la MAO, si ça peut vous être utile pour de l\'habillage sonore\r\nhttps://learningmusic.ableton.com/index.html\r\nBonne journée à tous !', 3, 1),
 	(4, '2022-11-04 11:28:27', 'Hello tout le monde !\r\nJe manque un peu d\'idées culinairement parlant,\r\nEst-ce que vous auriez des bonnes recettes de quiche à partager ?\r\nMerci d\'avance', 4, 1),
 	(5, '2022-11-04 16:45:53', 'Bonsoir, j\'ai eu le même problème mais avec du orange, est-ce qu\'il n\'y aurait pas un crayon de couleur coincé dans ton imprimante ?', 2, 2),
-	(6, '2022-11-04 16:53:19', 'Effectivement c\'était ça !\r\nTout fonctionne à merveille !\r\nMerci beaucoup !', 2, 1);
+	(6, '2022-11-04 16:53:19', 'Effectivement c\'était ça !\r\nTout fonctionne à merveille !\r\nMerci beaucoup !', 2, 1),
+	(8, '2022-11-09 10:49:02', 'bloublou', 5, 3),
+	(9, '2022-11-09 14:19:15', 'En vrai la quiche aux poireaux c\'est délicieux', 4, 3);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 
 -- Listage de la structure de la table forum_primo. topic
@@ -70,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `topic` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `FK_topic_categorie` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`id_categorie`),
   CONSTRAINT `FK_topic_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table forum_primo.topic : ~4 rows (environ)
 /*!40000 ALTER TABLE `topic` DISABLE KEYS */;
@@ -78,7 +80,8 @@ INSERT INTO `topic` (`id_topic`, `titreTopic`, `dateCreaTopic`, `verrouTopic`, `
 	(1, 'Echanges de fanzines', '2022-11-04 11:21:00', 0, 1, 1),
 	(2, 'Problèmes d\'impression', '2022-11-04 11:21:41', 1, 1, 1),
 	(3, 'Tuto Ableton', '2022-11-04 11:21:59', 0, 2, 1),
-	(4, 'Vos meilleures recettes de quiche ?', '2022-11-04 11:22:20', 0, 3, 1);
+	(4, 'Vos meilleures recettes de quiche ?', '2022-11-04 11:22:20', 0, 3, 1),
+	(5, 'blibli', '2022-11-09 10:49:02', 0, 3, 3);
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 
 -- Listage de la structure de la table forum_primo. user
@@ -87,15 +90,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `emailUser` varchar(50) NOT NULL,
   `mdpUser` varchar(255) NOT NULL,
   `pseudoUser` varchar(50) NOT NULL,
-  `roleUser` varchar(50) NOT NULL,
+  `roleUser` varchar(50) NOT NULL DEFAULT 'Utilisateur',
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table forum_primo.user : ~2 rows (environ)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id_user`, `emailUser`, `mdpUser`, `pseudoUser`, `roleUser`) VALUES
 	(1, 'martin.grimbert@sogetec.fr', 'pamplemousse67', 'Martin Grimbert', 'Admin'),
-	(2, 'anne-so.passereau@sogetec.fr', '544peofjefzo', 'Anne-Sophie Passereau', 'Moderateur');
+	(2, 'anne-so.passereau@sogetec.fr', '544peofjefzo', 'Anne-Sophie Passereau', 'Moderateur'),
+	(3, 'pierrem.primo@gmail.com', '$2y$10$R.K9VvhmLp9pXDpJ9HOkoeYcte1ZI0tHFC6XQmE4k3oBXIhZf2OCe', 'PM Primo', 'Utilisateur'),
+	(4, 'bubu@gmail.com', '$2y$10$2iwU/FoVZ.SjTnNIpixfte62lKFfo5q6hWI/IOgyzPXaaafzUF0RW', 'Bubu', 'Admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
