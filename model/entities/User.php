@@ -62,6 +62,16 @@
             return $this;
         }
 
+        //Vérifier si l'utilisateur a le rôle que l'on cherche 
+        public function hasRole($role){
+            if($this->roleUser == $role){
+                return $this->roleUser;
+            }
+            else{
+                return false;
+            }
+        }
+
         //ToString
         public function __toString()
         {

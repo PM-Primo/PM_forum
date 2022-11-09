@@ -73,6 +73,7 @@
                         // var_dump($user);
                         // die;
                         Session::setUser($user);
+                        return ["view" => VIEW_DIR."home.php"];
                     }
                 }
             }
