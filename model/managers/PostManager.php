@@ -42,6 +42,15 @@
             );
         }
 
+        public function deletePostsByTopic($id){
+
+            $sql = "DELETE FROM post
+                    WHERE topic_id = :id
+                    ";
+                    
+            return DAO::delete($sql, ['id' => $id]);
+        }
+
         
 
     }

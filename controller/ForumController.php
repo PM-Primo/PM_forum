@@ -170,19 +170,42 @@
 
         public function editTopic($id){
 
+            //On met à jour le titre du topic
             $topicManager = new TopicManager();
             $nvTitre = $_POST["nvTitre"];
             $data=["titreTopic" => $nvTitre];
             $topicManager->update($id, $data);
 
+            //On va chercher le premier post
             $postManager = new PostManager();
             $firstPost = $postManager->findFirstPostByTopic($id);
+
+            //Et on en change le texte
             $nvTexte = $_POST["nvTexte"];
             $data=["textePost" => $nvTexte];
             $firstPostId = $firstPost->getId();
             $postManager->update($firstPostId, $data);
 
             $this->redirectTo("forum", "listPosts", $id);
+        }
+
+        public function deleteTopic($id){
+
+            //On supprime tous les messages du topic
+            $postManager = new PostManager();
+            $postManager->deletePostsByTopic($id);
+            
+            //On va chercher la catégorie du topic pour rediriger par la suite
+            $topicManager = new TopicManager();
+            $topic = $topicManager->findOneById($id);
+            $catId = $topic->getCategorie()->getId();
+
+            //On supprime le topic
+            $topicManager->delete($id);
+
+            //On redirige
+            $this->redirectTo("forum", "listTopics", $catId);
+
         }
     }
 ?>
