@@ -8,8 +8,9 @@ $catId=$categorie->getId();
 
 <h1>Liste des topics</h1>
 <h2>Catégorie : <?= $categorie ?></h2>
-
-<a href="index.php?ctrl=forum&action=addTopicForm&id=<?=$catId?>">Nouveau topic<a>
+<?php if(App\Session::getUser()){ ?>
+    <a href="index.php?ctrl=forum&action=addTopicForm&id=<?=$catId?>">Nouveau topic<a>
+<?php } ?>
 
 <?php
 foreach($topics as $topic){

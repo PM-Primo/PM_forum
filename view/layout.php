@@ -42,12 +42,11 @@
                             ?>
                             <a href="index.php?ctrl=security&action=loginForm">Connexion</a>
                             <a href="index.php?ctrl=security&action=addUserForm">Inscription</a>
-                            <a href="index.php?ctrl=forum&action=listCategories">la liste des catégories</a>
-                        <?php
+                            
+                            <?php
                         }
-                   
-                        
                     ?>
+                    <a href="index.php?ctrl=forum&action=listCategories">Liste des catégories</a>
                     </div>
                 </nav>
             </header>

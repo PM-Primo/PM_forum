@@ -18,22 +18,24 @@ foreach($posts as $post){
     
 }
 ?>
-<?php 
-if(!$verrouTopic){?>
-<form action="index.php?ctrl=forum&action=addPost&id=<?=$topicId?>" method="post" class="formulaire">
-    <p>
-        <label>
-            Message :<br>
-            <textarea name="textePost" rows="5" cols="45" required></textarea>        
-        </label>
-    </p>
+<?php
+if(App\Session::getUser()){
+    if(!$verrouTopic){?>
+    <form action="index.php?ctrl=forum&action=addPost&id=<?=$topicId?>" method="post" class="formulaire">
+        <p>
+            <label>
+                Message :<br>
+                <textarea name="textePost" rows="5" cols="45" required></textarea>        
+            </label>
+        </p>
 
-    <div class="submit_wrapper">
-        <input type="submit" name="submit" value="Répondre" class="submit">
-    </div>
-        
-</form>
+        <div class="submit_wrapper">
+            <input type="submit" name="submit" value="Répondre" class="submit">
+        </div>
+            
+    </form>
 <?php }
-else {
-    echo "TOPIC VERROUILLÉ !";
+    else {
+        echo "TOPIC VERROUILLÉ !";
+    }
 } ?>
