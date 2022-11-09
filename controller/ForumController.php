@@ -151,6 +151,7 @@
             $this->redirectTo("forum", "listPosts", $idTopic);
         }
 
+        //Appel du formulaire d'édition d'un topic ($id) + 1er message
         public function editTopicForm($id){
 
             $topicManager = new TopicManager();
@@ -168,6 +169,7 @@
             ];
         }
 
+        //Edition d'un topic ($id) + premier message
         public function editTopic($id){
 
             //On met à jour le titre du topic
@@ -189,6 +191,7 @@
             $this->redirectTo("forum", "listPosts", $id);
         }
 
+        //Suppression d'un topic ($id) & de tous les messages qu'il contient
         public function deleteTopic($id){
 
             //On supprime tous les messages du topic
@@ -205,7 +208,25 @@
 
             //On redirige
             $this->redirectTo("forum", "listTopics", $catId);
-
         }
+
+        public function lockTopic($id){
+            $topicManager = new TopicManager();
+            $catId = $topicManager->findOneById($id)->getCategorie()->getId(); 
+            $data=["verrouTopic" => 1];
+            $topicManager->update($id, $data);
+
+            $this->redirectTo("forum", "listTopics", $catId);
+        }
+
+        public function unlockTopic($id){
+            $topicManager = new TopicManager();
+            $catId = $topicManager->findOneById($id)->getCategorie()->getId(); 
+            $data=["verrouTopic" => 0];
+            $topicManager->update($id, $data);
+
+            $this->redirectTo("forum", "listTopics", $catId);
+        }
+
     }
 ?>

@@ -19,7 +19,16 @@ foreach($topics as $topic){
         echo " [VERROUILLÉ]";
     } 
     if (\App\Session::getUser()->getId() == $topic->getUser()->getId()){
-        echo " [<a href='index.php?ctrl=forum&action=editTopicForm&id=".$topic->getId()."'>Éditer</a> / <a href='index.php?ctrl=forum&action=deleteTopic&id=".$topic->getId()."'>Supprimer</a>]";
+        echo " [<a href='index.php?ctrl=forum&action=editTopicForm&id=".$topic->getId()."'>Éditer</a> /
+         <a href='index.php?ctrl=forum&action=deleteTopic&id=".$topic->getId()."'>Supprimer</a> / ";
+        
+        if($topic->getVerrouTopic()){
+            echo "<a href='index.php?ctrl=forum&action=unlockTopic&id=".$topic->getId()."'>Déverrouiller</a>";
+        }
+        else{
+            echo "<a href='index.php?ctrl=forum&action=lockTopic&id=".$topic->getId()."'>Verrouiller</a>";
+        }
+        echo "]";
     } 
     echo "<br>Date ".$topic->getDateCreaTopic()." - Auteur :  ".$topic->getUser()."</p>";
 }
