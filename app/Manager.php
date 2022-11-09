@@ -75,6 +75,29 @@
             return DAO::delete($sql, ['id' => $id]); 
         }
 
+        public function update($id, $data){
+
+            $dataLength = count($data);
+            $i = 0;
+            $setString = "";
+            $param = ['id' => $id];
+
+            while($i<$dataLength){
+                $setString .= array_keys($data)[$i]." = :valeur".$i.", ";
+                $param += ["valeur".$i => array_values($data)[$i]];
+                $i++;
+            }
+
+            $setString=substr($setString, 0, -2);
+
+            $sql = "UPDATE ".$this->tableName."
+                    SET ".$setString."
+                    WHERE id_".$this->tableName." = :id  
+                    ";
+
+            return DAO::update($sql, $param);
+        }
+
         private function generate($rows, $class){
             foreach($rows as $row){
                 yield new $class($row);

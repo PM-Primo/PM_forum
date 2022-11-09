@@ -5,7 +5,8 @@
     use App\Session;
     use App\AbstractController;
     use App\ControllerInterface;
-    use Model\Managers\TopicManager;
+use DateTime;
+use Model\Managers\TopicManager;
     use Model\Managers\CategorieManager;
     use Model\Managers\PostManager;
     
@@ -80,16 +81,16 @@
             $catId = $_GET["id"];
             $titre = filter_input(INPUT_POST, "titreTopic", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $texte = filter_input(INPUT_POST, "texteFirstPost", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $userId = 1;
 
+            if($catId && $titre && $texte && \App\Session::getUser()){
 
-            if($catId && $titre && $userId && $texte){
+                $userId=\App\Session::getUser()->getId();
 
-                $topicManager = new TopicManager;
+                $topicManager = new TopicManager();
                 $dataTopic=["titreTopic"=>$titre,"categorie_id"=>$catId, "user_id"=>$userId];
                 $newTopicId = $topicManager->add($dataTopic);
 
-                $postManager = new PostManager;
+                $postManager = new PostManager();
                 $dataFirstPost=["textePost"=>$texte,"topic_id"=>$newTopicId, "user_id"=>$userId];
                 $postManager->add($dataFirstPost);
             }
@@ -100,14 +101,39 @@
         public function addPost($id){
 
             $texte = filter_input(INPUT_POST, "textePost", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $userId = 1;
 
-            if($id && $texte && $userId){
+            if($id && $texte && \App\Session::getUser()){ // on doit mettre un "\" au début pour qu'il aille à la racine et non dans le namespace Controller\App\Session
+
+                $userId= \App\Session::getUser()->getId();
+                
                 $postManager = new PostManager();
                 $data=["textePost"=>$texte,"topic_id"=>$id, "user_id"=>$userId];
                 $postManager->add($data);
             }
             $this->redirectTo("forum", "listPosts", $id);
+        }
+
+        public function editPostForm($id){
+
+            $postManager = new PostManager();
+            $post = $postManager->findOneById($id);
+
+            return [
+                "view" => VIEW_DIR."forum/editPostForm.php",
+                "data" => [
+                    "post" => $post
+                ]
+            ];
+        }
+
+        public function editPost($id){
+            
+            $postManager = new PostManager();
+            $nvTexte = $_POST["nvTextePost"];
+            $data=["textePost" => $nvTexte];
+            $postManager->update($id, $data);
+            $idTopic=$postManager->findOneById($id)->getTopic()->getId();
+            $this->redirectTo("forum", "listPosts", $idTopic);
         }
     }
 ?>
