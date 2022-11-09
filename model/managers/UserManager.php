@@ -21,7 +21,7 @@
             WHERE emailUser = :email";
     
             return $this->getOneOrNullResult(
-                DAO::select($sql,['email' => $email]), 
+                DAO::select($sql,['email' => $email], false), //On rajoute false car la fonction select a "multiple results = true" par défaut, du coup ça renvoie un objet null si on ne met pas "false"
                 $this->className
             );
         }
@@ -33,6 +33,18 @@
 
             return $this->getOneOrNullResult(
                 DAO::select($sql,['pseudo' => $pseudo]), 
+                $this->className
+            );
+        }
+
+        
+        public function findMdpByEmail($email){
+            $sql = "SELECT mdpUser
+            FROM user u 
+            WHERE emailUser = :email";
+    
+            return $this->getSingleScalarResult(
+                DAO::select($sql,['email' => $email]), 
                 $this->className
             );
         }

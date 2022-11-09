@@ -64,9 +64,17 @@
                 $userManager = new UserManager();
 
                 //On vérifie que l'e-mail est bien dans la base de données
-                if($userManager->getOneByEmail($emailUser)){
-                    //REPRISE ICI 
-                };
+                if($userManager->findOneByEmail($emailUser)){
+                    
+                    $mdpHash = $userManager->findMdpByEmail($emailUser)["mdpUser"]; //on va chercher le mdp associé à l'e-mail dans la BDD
+                    if (password_verify($mdpUser, $mdpHash)){ //on vérifie que le mdp hashé en bdd & le mdp entré sont identiques
+                        
+                        $user = $userManager->findOneByEmail($emailUser); //on va rechercher l'utilisateur associé
+                        // var_dump($user);
+                        // die;
+                        Session::setUser($user);
+                    }
+                }
             }
         }
 

@@ -1,6 +1,7 @@
 <?php
     namespace App;
 
+
     class Session{
 
         private static $categories = ['error', 'success'];
@@ -38,7 +39,7 @@
         }
 
         public static function isAdmin(){
-            if(self::getUser() && self::getUser()->hasRole("ROLE_ADMIN")){
+            if(self::getUser()){ // && self::getUser()->hasRole("ROLE_ADMIN")
                 return true;
             }
             return false;
