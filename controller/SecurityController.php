@@ -78,6 +78,11 @@
             }
         }
 
+        public function logout(){
+            $_SESSION["user"]=null;
+            return ["view" => VIEW_DIR."home.php"];
+        }
+
 
     }
 ?>
