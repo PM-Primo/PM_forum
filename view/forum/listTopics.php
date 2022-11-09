@@ -18,7 +18,10 @@ foreach($topics as $topic){
     if ($topic->getVerrouTopic()){
         echo " [VERROUILLÉ]";
     } 
-    echo " - Date ".$topic->getDateCreaTopic()." - Auteur :  ".$topic->getUser()."</p>";
+    if (\App\Session::getUser()->getId() == $topic->getUser()->getId()){
+        echo " [<a href='index.php?ctrl=forum&action=editTopicForm&id=".$topic->getId()."'>Éditer</a> / <a href='index.php?ctrl=forum&action=deleteTopic&id=".$topic->getId()."'>Supprimer</a>]";
+    } 
+    echo "<br>Date ".$topic->getDateCreaTopic()." - Auteur :  ".$topic->getUser()."</p>";
 }
 
 ?>

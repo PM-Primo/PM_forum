@@ -28,5 +28,21 @@
             );
         }
 
+        public function findFirstPostByTopic($id){
+
+            $sql = "SELECT *
+                    FROM post
+                    WHERE topic_id = :id
+                    ORDER BY datePost ASC
+                    LIMIT 1";
+
+            return $this->getOneOrNullResult(
+                DAO::select($sql,['id' => $id], false), 
+                $this->className
+            );
+        }
+
+        
+
     }
 ?>

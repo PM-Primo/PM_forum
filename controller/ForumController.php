@@ -150,5 +150,39 @@
             $postManager->delete($id);
             $this->redirectTo("forum", "listPosts", $idTopic);
         }
+
+        public function editTopicForm($id){
+
+            $topicManager = new TopicManager();
+            $topic = $topicManager->findOneById($id);
+
+            $postManager = new PostManager();
+            $firstPost = $postManager->findFirstPostByTopic($id);
+
+            return [
+                "view" => VIEW_DIR."forum/editTopicForm.php",
+                "data" => [
+                    "topic" => $topic,
+                    "firstPost" => $firstPost,
+                ]
+            ];
+        }
+
+        public function editTopic($id){
+
+            $topicManager = new TopicManager();
+            $nvTitre = $_POST["nvTitre"];
+            $data=["titreTopic" => $nvTitre];
+            $topicManager->update($id, $data);
+
+            $postManager = new PostManager();
+            $firstPost = $postManager->findFirstPostByTopic($id);
+            $nvTexte = $_POST["nvTexte"];
+            $data=["textePost" => $nvTexte];
+            $firstPostId = $firstPost->getId();
+            $postManager->update($firstPostId, $data);
+
+            $this->redirectTo("forum", "listPosts", $id);
+        }
     }
 ?>
