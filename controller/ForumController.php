@@ -100,6 +100,12 @@
                 $postManager = new PostManager();
                 $dataFirstPost=["textePost"=>$texte,"topic_id"=>$newTopicId, "user_id"=>$userId];
                 $postManager->add($dataFirstPost);
+
+                Session::addFlash('success','Nouveau topic créé');
+
+            }
+            else{
+                Session::addFlash('error','Action Impossible !');
             }
             $this->redirectTo("forum", "listPosts", $newTopicId);
         }   
@@ -116,7 +122,14 @@
                 $postManager = new PostManager();
                 $data=["textePost"=>$texte,"topic_id"=>$id, "user_id"=>$userId];
                 $postManager->add($data);
+
+                Session::addFlash('success','Réponse enregistrée');
+
             }
+            else{
+                Session::addFlash('error','Action Impossible !');
+            }
+
             $this->redirectTo("forum", "listPosts", $id);
         }
 
@@ -144,6 +157,11 @@
                 $nvTexte = $_POST["nvTextePost"];
                 $data=["textePost" => $nvTexte];
                 $postManager->update($id, $data);
+
+                Session::addFlash('success','Message modifié avec succès');
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
             }
 
             $idTopic=$postManager->findOneById($id)->getTopic()->getId();
@@ -159,6 +177,10 @@
 
             if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId && $id != $firstPostId){
                 $postManager->delete($id);
+                Session::addFlash('success','Message supprimé avec succès');
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
             }
 
             $this->redirectTo("forum", "listPosts", $idTopic);
@@ -203,6 +225,12 @@
                 $data=["textePost" => $nvTexte];
                 $firstPostId = $firstPost->getId();
                 $postManager->update($firstPostId, $data);
+
+                Session::addFlash('success','Topic modifié avec succès');
+
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
             }
 
             $this->redirectTo("forum", "listPosts", $id);
@@ -226,8 +254,13 @@
                 
                 //On supprime le topic
                 $topicManager->delete($id);
-            }
 
+                //Message de validation
+                Session::addFlash('success','Topic supprimé avec succès');
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
+            }
 
             //On redirige
             $this->redirectTo("forum", "listTopics", $catId);
@@ -242,6 +275,10 @@
             if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
                 $data=["verrouTopic" => 1];
                 $topicManager->update($id, $data);
+                Session::addFlash('success','Topic verrouillé avec succès');
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
             }
 
             $this->redirectTo("forum", "listTopics", $catId);
@@ -256,6 +293,10 @@
             if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
                 $data=["verrouTopic" => 0];
                 $topicManager->update($id, $data);
+                Session::addFlash('success','Topic déverrouillé avec succès');
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
             }
             
             $this->redirectTo("forum", "listTopics", $catId);
