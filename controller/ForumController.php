@@ -136,9 +136,14 @@
         public function editPost($id){
             
             $postManager = new PostManager();
-            $nvTexte = $_POST["nvTextePost"];
-            $data=["textePost" => $nvTexte];
-            $postManager->update($id, $data);
+            $userId=$postManager->findOneById($id)->getUser()->getId();
+            
+            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
+                $nvTexte = $_POST["nvTextePost"];
+                $data=["textePost" => $nvTexte];
+                $postManager->update($id, $data);
+            }
+
             $idTopic=$postManager->findOneById($id)->getTopic()->getId();
             $this->redirectTo("forum", "listPosts", $idTopic);
         }
@@ -147,7 +152,10 @@
         public function deletePost($id){
             $postManager = new PostManager();
             $idTopic=$postManager->findOneById($id)->getTopic()->getId();
-            $postManager->delete($id);
+            $userId=$postManager->findOneById($id)->getUser()->getId();
+            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
+                $postManager->delete($id);
+            }
             $this->redirectTo("forum", "listPosts", $idTopic);
         }
 
@@ -171,22 +179,26 @@
 
         //Edition d'un topic ($id) + premier message
         public function editTopic($id){
-
-            //On met à jour le titre du topic
+            //On vérifie que l'utilisateur est bien l'auteur du topic
             $topicManager = new TopicManager();
-            $nvTitre = $_POST["nvTitre"];
-            $data=["titreTopic" => $nvTitre];
-            $topicManager->update($id, $data);
+            $userId = $topicManager->findOneById($id)->getUser()->getId();
+            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
 
-            //On va chercher le premier post
-            $postManager = new PostManager();
-            $firstPost = $postManager->findFirstPostByTopic($id);
+                //On met à jour le titre du topic
+                $nvTitre = $_POST["nvTitre"];
+                $data=["titreTopic" => $nvTitre];
+                $topicManager->update($id, $data);
 
-            //Et on en change le texte
-            $nvTexte = $_POST["nvTexte"];
-            $data=["textePost" => $nvTexte];
-            $firstPostId = $firstPost->getId();
-            $postManager->update($firstPostId, $data);
+                //On va chercher le premier post
+                $postManager = new PostManager();
+                $firstPost = $postManager->findFirstPostByTopic($id);
+
+                //Et on en change le texte
+                $nvTexte = $_POST["nvTexte"];
+                $data=["textePost" => $nvTexte];
+                $firstPostId = $firstPost->getId();
+                $postManager->update($firstPostId, $data);
+            }
 
             $this->redirectTo("forum", "listPosts", $id);
         }
@@ -194,37 +206,53 @@
         //Suppression d'un topic ($id) & de tous les messages qu'il contient
         public function deleteTopic($id){
 
-            //On supprime tous les messages du topic
-            $postManager = new PostManager();
-            $postManager->deletePostsByTopic($id);
-            
             //On va chercher la catégorie du topic pour rediriger par la suite
             $topicManager = new TopicManager();
             $topic = $topicManager->findOneById($id);
             $catId = $topic->getCategorie()->getId();
+            $userId = $topic->getUser()->getId();
 
-            //On supprime le topic
-            $topicManager->delete($id);
+            //On vérifie que l'utilisateur est bien l'auteur du topic
+            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
+
+                //On supprime tous les messages du topic
+                $postManager = new PostManager();
+                $postManager->deletePostsByTopic($id);
+                
+                //On supprime le topic
+                $topicManager->delete($id);
+            }
+
 
             //On redirige
             $this->redirectTo("forum", "listTopics", $catId);
         }
 
+        //Verrouillage d'un topic
         public function lockTopic($id){
             $topicManager = new TopicManager();
-            $catId = $topicManager->findOneById($id)->getCategorie()->getId(); 
-            $data=["verrouTopic" => 1];
-            $topicManager->update($id, $data);
+            $catId = $topicManager->findOneById($id)->getCategorie()->getId();
+            $userId = $topicManager->findOneById($id)->getUser()->getId();
+
+            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
+                $data=["verrouTopic" => 1];
+                $topicManager->update($id, $data);
+            }
 
             $this->redirectTo("forum", "listTopics", $catId);
         }
 
+        //Déverrouillage d'un topic
         public function unlockTopic($id){
             $topicManager = new TopicManager();
-            $catId = $topicManager->findOneById($id)->getCategorie()->getId(); 
-            $data=["verrouTopic" => 0];
-            $topicManager->update($id, $data);
+            $catId = $topicManager->findOneById($id)->getCategorie()->getId();
+            $userId = $topicManager->findOneById($id)->getUser()->getId();
 
+            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
+                $data=["verrouTopic" => 0];
+                $topicManager->update($id, $data);
+            }
+            
             $this->redirectTo("forum", "listTopics", $catId);
         }
 
