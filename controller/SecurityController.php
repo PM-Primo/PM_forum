@@ -142,5 +142,18 @@
             }
         }
 
+        public function viewProfile($id){
+
+            $userManager = new UserManager();
+
+            return [
+                "view" => VIEW_DIR."forum/viewProfile.php",
+                "data" => [
+                    "user" => $userManager->findOneById($id)
+                ]
+            ];
+        
+        }
+
     }
 ?>
