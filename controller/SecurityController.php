@@ -116,10 +116,31 @@
 
         //logout
         public function logout(){
-            $_SESSION["user"]=null;
+            //$_SESSION[]=session_unset();
+            $_SESSION['user'] = null;
+            Session::addFlash('success','À bientôt !');
             return ["view" => VIEW_DIR."home.php"];
         }
 
+        public function listUsers(){
+
+            $userManager = new UserManager();
+
+            if(\App\Session::IsAdmin()){
+                return [
+                    "view" => VIEW_DIR."forum/listUsers.php",
+                    "data" => [
+                        "users" => $userManager->findAll(["pseudoUser", "ASC"])
+                    ]
+                ];
+            }
+            else{
+                Session::addFlash('error','Accès interdit');
+                return [
+                    "view" => VIEW_DIR."home.php"
+                ];
+            }
+        }
 
     }
 ?>

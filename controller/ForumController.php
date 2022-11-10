@@ -9,6 +9,7 @@
     use Model\Managers\TopicManager;
     use Model\Managers\CategorieManager;
     use Model\Managers\PostManager;
+    use Model\Managers\UserManager;
     
     class ForumController extends AbstractController implements ControllerInterface{
 
@@ -298,7 +299,7 @@
             else{
                 Session::addFlash('error','Action Impossible');
             }
-            
+
             $this->redirectTo("forum", "listTopics", $catId);
         }
 
