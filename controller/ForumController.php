@@ -155,9 +155,9 @@
             $postManager = new PostManager();
             $idTopic = $postManager->findOneById($id)->getTopic()->getId();
             $userId = $postManager->findOneById($id)->getUser()->getId();
-            $firstPostId= $postManager->findFirstPostByTopic()->getId();
+            $firstPostId= $postManager->findFirstPostByTopic($idTopic)->getId();
 
-            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId && $id != $firstPostId ){
+            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId && $id != $firstPostId){
                 $postManager->delete($id);
             }
 
