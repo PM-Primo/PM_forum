@@ -2,6 +2,7 @@
 
 $posts = $result["data"]['posts'];
 $topic = $result["data"]['topic'];
+$firstPost = $result["data"]['firstPost'];
 $topicId = $topic->getId();
 $catId = $topic->getCategorie()->getId();
 $catNom = $topic->getCategorie()->getNomCategorie();
@@ -20,7 +21,11 @@ foreach($posts as $post){
     echo "(".$post->getDatePost().")<br>";
     if(\App\Session::getUser()){
         if (\App\Session::getUser()->getId() == $post->getUser()->getId()){
-            echo "<a href='index.php?ctrl=forum&action=editPostForm&id=".$post->getId()."'>Éditer</a> / <a href='index.php?ctrl=forum&action=deletePost&id=".$post->getId()."'>Supprimer</a><br>";
+            echo "<a href='index.php?ctrl=forum&action=editPostForm&id=".$post->getId()."'>Éditer</a>";
+            if($firstPost->getId() != $post->getId()){ //Pour empêcher que l'on puisse supprimer le premier post d'un topic
+                echo " / <a href='index.php?ctrl=forum&action=deletePost&id=".$post->getId()."'>Supprimer</a>";
+            }
+            echo "<br>";
         }
     }
     echo $post."<br><br>";

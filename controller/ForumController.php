@@ -64,12 +64,14 @@
             $postManager = new PostManager();
             
             $topic = $topicManager->findOneById($id);
+            $firstPost = $postManager->findFirstPostByTopic($id);
 
             return [
                 "view" => VIEW_DIR."forum/listPosts.php",
                 "data" => [
                     "posts" => $postManager->listPosts($id),
-                    "topic" => $topic
+                    "topic" => $topic,
+                    "firstPost" => $firstPost
                 ]
             ];
 
@@ -137,7 +139,7 @@
             
             $postManager = new PostManager();
             $userId=$postManager->findOneById($id)->getUser()->getId();
-            
+
             if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
                 $nvTexte = $_POST["nvTextePost"];
                 $data=["textePost" => $nvTexte];
@@ -151,11 +153,14 @@
         //Suppression d'un post ($id)
         public function deletePost($id){
             $postManager = new PostManager();
-            $idTopic=$postManager->findOneById($id)->getTopic()->getId();
-            $userId=$postManager->findOneById($id)->getUser()->getId();
-            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
+            $idTopic = $postManager->findOneById($id)->getTopic()->getId();
+            $userId = $postManager->findOneById($id)->getUser()->getId();
+            $firstPostId= $postManager->findFirstPostByTopic()->getId();
+
+            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId && $id != $firstPostId ){
                 $postManager->delete($id);
             }
+
             $this->redirectTo("forum", "listPosts", $idTopic);
         }
 
