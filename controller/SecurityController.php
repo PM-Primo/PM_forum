@@ -128,7 +128,7 @@
 
             if(\App\Session::IsAdmin()){
                 return [
-                    "view" => VIEW_DIR."forum/listUsers.php",
+                    "view" => VIEW_DIR."security/listUsers.php",
                     "data" => [
                         "users" => $userManager->findAll(["pseudoUser", "ASC"])
                     ]
@@ -145,11 +145,13 @@
         public function viewProfile($id){
 
             $userManager = new UserManager();
+            $postManager = new PostManager();
 
             return [
-                "view" => VIEW_DIR."forum/viewProfile.php",
+                "view" => VIEW_DIR."security/viewProfile.php",
                 "data" => [
-                    "user" => $userManager->findOneById($id)
+                    "user" => $userManager->findOneById($id),
+                    "userPosts" => $postManager->findPostsByUser($id)
                 ]
             ];
         

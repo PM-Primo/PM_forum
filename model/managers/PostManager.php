@@ -51,5 +51,17 @@
             return DAO::delete($sql, ['id' => $id]);
         }   
 
+        public function findPostsByUser($id){
+            $sql = "SELECT *
+                    FROM post
+                    WHERE user_id = :id
+                    ORDER BY datePost ASC
+                    ";
+
+            return $this->getMultipleResults(
+                DAO::select($sql,['id' => $id]), 
+                $this->className
+            );
+        }
     }
 ?>
