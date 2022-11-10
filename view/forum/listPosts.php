@@ -14,8 +14,10 @@ foreach($posts as $post){
 
     echo $post->getUser()."<br>";
     echo "(".$post->getDatePost().")<br>";
-    if (\App\Session::getUser()->getId() == $post->getUser()->getId()){
-        echo "<a href='index.php?ctrl=forum&action=editPostForm&id=".$post->getId()."'>Éditer</a> / <a href='index.php?ctrl=forum&action=deletePost&id=".$post->getId()."'>Supprimer</a><br>";
+    if(\App\Session::getUser()){
+        if (\App\Session::getUser()->getId() == $post->getUser()->getId()){
+            echo "<a href='index.php?ctrl=forum&action=editPostForm&id=".$post->getId()."'>Éditer</a> / <a href='index.php?ctrl=forum&action=deletePost&id=".$post->getId()."'>Supprimer</a><br>";
+        }
     }
     echo $post."<br><br>";
     
