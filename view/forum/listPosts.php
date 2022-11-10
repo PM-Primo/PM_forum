@@ -3,11 +3,15 @@
 $posts = $result["data"]['posts'];
 $topic = $result["data"]['topic'];
 $topicId = $topic->getId();
+$catId = $topic->getCategorie()->getId();
+$catNom = $topic->getCategorie()->getNomCategorie();
 $verrouTopic = $topic->getVerrouTopic();
 
 ?>
 
+<br><br><a href="index.php?ctrl=forum&action=listTopics&id=<?= $catId ?>"><- <?= $catNom?></a>
 <h1><?= $topic ?></h1>
+
 
 <?php
 foreach($posts as $post){

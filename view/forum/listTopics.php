@@ -5,6 +5,7 @@ $categorie = $result["data"]['categorie'];
 $catId=$categorie->getId();
 
 ?>
+<br><br><a href="index.php?ctrl=forum&action=listCategories"><- Catégories</a>
 
 <h1>Liste des topics</h1>
 <h2>Catégorie : <?= $categorie ?></h2>
