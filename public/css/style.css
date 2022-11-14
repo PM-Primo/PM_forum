@@ -10,15 +10,37 @@
     box-sizing: border-box;
 }
 
+body{
+    background: rgb(249,245,229);
+}
+
+
 a{
     text-decoration: none;
     color: rgb(200, 133, 75);
     font-weight: 500;
+    display: inline-block;
+    position: relative;
 }
 
-body{
-    background: rgb(249,245,229);
+/*Petit effet d'animation des liens*/
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(200, 133, 75);
+    transition: transform 0.4s;
 }
+  
+a:hover::after {
+    transform: scaleX(1);
+}
+
 
 
 /*Titres*/
@@ -67,7 +89,8 @@ nav a{
 /*Page Liste des catégories*/
 .catListe{
     text-align: center;
-    line-height: 22pt;
+    font-size: 16pt;
+    line-height: 26pt;
 }
 
 /*Footer*/
