@@ -10,7 +10,7 @@ $verrouTopic = $topic->getVerrouTopic();
 
 ?>
 
-<br><br><a href="index.php?ctrl=forum&action=listTopics&id=<?= $catId ?>"><- <?= $catNom?></a>
+<a href="index.php?ctrl=forum&action=listTopics&id=<?= $catId ?>"><i class="fa-solid fa-arrow-left"></i> <?= $catNom?></a>
 <h1><?= $topic ?></h1>
 
 

@@ -5,10 +5,7 @@ $categorie = $result["data"]['categorie'];
 $catId=$categorie->getId();
 
 ?>
-<br><br><a href="index.php?ctrl=forum&action=listCategories"><- Catégories</a>
-
-<h1>Liste des topics</h1>
-<h2>Catégorie : <?= $categorie ?></h2>
+<h1>Topics - <?= $categorie ?> : </h1>
 <?php if(App\Session::getUser()){ ?>
     <a href="index.php?ctrl=forum&action=addTopicForm&id=<?=$catId?>">Nouveau topic<a>
 <?php } ?>
@@ -16,9 +13,9 @@ $catId=$categorie->getId();
 <?php
 if($topics){
     foreach($topics as $topic){
-        echo "<p><a href='index.php?ctrl=forum&action=listPosts&id=".$topic->getId()."'>".$topic->getTitreTopic()."</a>";
+        echo "<p class='uniteTopic'><a href='index.php?ctrl=forum&action=listPosts&id=".$topic->getId()."'>".$topic->getTitreTopic()."</a>";
         if ($topic->getVerrouTopic()){
-            echo " [VERROUILLÉ]";
+            echo "&nbsp&nbsp<i class='fa-solid fa-lock'></i>";
         } 
         if(\App\Session::getUser()){
             if (\App\Session::getUser()->getId() == $topic->getUser()->getId()){
