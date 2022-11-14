@@ -10,6 +10,8 @@
         private $mdpUser;
         private $pseudoUser;
         private $roleUser;
+        private $nbPostsUser; // non mappé
+        private $nbTopicsUser; // non mappé
 
         //Constructeur
         public function __construct($data){         
@@ -59,6 +61,24 @@
 
         public function setRoleUser($nvRole){
             $this->roleUser = $nvRole;
+            return $this;
+        }
+
+        public function getNbPostsUser(){
+            return $this->nbPostsUser;
+        }
+
+        public function setNbPostsUser($nvNbPosts){
+            $this->nbPostsUser = $nvNbPosts;
+            return $this;
+        }
+
+        public function getNbTopicsUser(){
+            return $this->nbTopicsUser;
+        }
+
+        public function setNbTopicsUser($nvNbTopics){
+            $this->nbTopicsUser = $nvNbTopics;
             return $this;
         }
 

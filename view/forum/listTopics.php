@@ -34,7 +34,7 @@ if($topics){
                 echo "]";
             } 
         }   
-        echo "<br>Date ".$topic->getDateCreaTopic()." - Auteur :  ".$topic->getUser()."</p>";
+        echo "<br>Date ".$topic->getDateCreaTopic()." - Auteur :  ".$topic->getUser()." - ".$topic->getNbPostsTopic()." Réponses</p>";
     }
 }
 else{

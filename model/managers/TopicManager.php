@@ -16,9 +16,11 @@
 
         public function listTopics($id){
 
-            $sql = "SELECT *
-                    FROM topic t 
-                    WHERE categorie_id = :id
+            $sql = "SELECT t.id_topic, t.titreTopic, t.dateCreaTopic, t.verrouTopic, t.user_id, COUNT(p.topic_id) AS nbPostsTopic
+                    FROM topic t
+                    LEFT JOIN post p ON t.id_topic = p.topic_id
+                    WHERE t.categorie_id = :id
+                    GROUP BY t.id_topic
                     ORDER BY dateCreaTopic DESC ";
 
             return $this->getMultipleResults(

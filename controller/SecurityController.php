@@ -145,15 +145,14 @@
         public function viewProfile($id){
 
             $userManager = new UserManager();
-            $postManager = new PostManager();
 
             return [
                 "view" => VIEW_DIR."security/viewProfile.php",
                 "data" => [
-                    "user" => $userManager->findOneById($id),
-                    "userPosts" => $postManager->findPostsByUser($id)
+                    "user" => $userManager->viewProfile($id),
                 ]
             ];
+
         
         }
 

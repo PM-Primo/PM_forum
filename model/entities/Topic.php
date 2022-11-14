@@ -11,6 +11,7 @@
         private $verrouTopic;
         private $categorie;
         private $user;
+        private $nbPostsTopic; // non mappé
 
         public function __construct($data){         
             $this->hydrate($data);        
@@ -76,6 +77,15 @@
 
         public function setUser($nvUser){
             $this->user = $nvUser;
+            return $this;
+        }
+
+        public function getNbPostsTopic(){
+            return $this->nbPostsTopic;
+        }
+
+        public function setNbPostsTopic($nvNbPosts){
+            $this->nbPostsTopic = $nvNbPosts;
             return $this;
         }
 

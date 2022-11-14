@@ -114,6 +114,13 @@
 
         protected function getOneOrNullResult($row, $class){
 
+            // var_dump($class);
+            // echo "<br><br>";
+            // var_dump($row);
+            // echo "<br><br>";
+            // var_dump(new $class($row));
+            // die;
+
             if($row != null){
                 return new $class($row);
             }
