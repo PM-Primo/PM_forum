@@ -20,6 +20,7 @@
                 <nav>
                     <div id="nav-left">
                         <a href="index.php">Accueil</a>
+                        <a href="index.php?ctrl=forum&action=listCategories">Liste des catégories</a>
                         <?php
                         if(App\Session::isAdmin()){
                             ?>
@@ -29,6 +30,7 @@
                         }
                         ?>
                     </div>
+                    <a href="index.php" id="titreForum">forum</a>
                     <div id="nav-right">
                     <?php
                         
@@ -46,7 +48,7 @@
                             <?php
                         }
                     ?>
-                    <a href="index.php?ctrl=forum&action=listCategories">Liste des catégories</a>
+                    
                     </div>
                 </nav>
             </header>
