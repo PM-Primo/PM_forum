@@ -18,7 +18,7 @@ if($topics){
             echo "&nbsp&nbsp<i class='fa-solid fa-lock'></i>";
         } 
         if(\App\Session::getUser()){
-            if (\App\Session::getUser()->getId() == $topic->getUser()->getId()){
+            if (\App\Session::getUser()->getId() == $topic->getUser()->getId()||\App\Session::isAdmin()){
                 echo " [<a href='index.php?ctrl=forum&action=editTopicForm&id=".$topic->getId()."'>Éditer</a> /
                 <a href='index.php?ctrl=forum&action=deleteTopic&id=".$topic->getId()."'>Supprimer</a> / ";
                 

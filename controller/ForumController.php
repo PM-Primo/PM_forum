@@ -225,25 +225,28 @@
             //On vérifie que l'utilisateur est bien l'auteur du topic
             $topicManager = new TopicManager();
             $userId = $topicManager->findOneById($id)->getUser()->getId();
-            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
+            if(\App\Session::getUser()){
+                if(\App\Session::getUser()->getId() == $userId || \App\Session::isAdmin()){
+                    //On met à jour le titre du topic
+                    $nvTitre = $_POST["nvTitre"];
+                    $data=["titreTopic" => $nvTitre];
+                    $topicManager->update($id, $data);
 
-                //On met à jour le titre du topic
-                $nvTitre = $_POST["nvTitre"];
-                $data=["titreTopic" => $nvTitre];
-                $topicManager->update($id, $data);
+                    //On va chercher le premier post
+                    $postManager = new PostManager();
+                    $firstPost = $postManager->findFirstPostByTopic($id);
 
-                //On va chercher le premier post
-                $postManager = new PostManager();
-                $firstPost = $postManager->findFirstPostByTopic($id);
+                    //Et on en change le texte
+                    $nvTexte = $_POST["nvTexte"];
+                    $data=["textePost" => $nvTexte];
+                    $firstPostId = $firstPost->getId();
+                    $postManager->update($firstPostId, $data);
 
-                //Et on en change le texte
-                $nvTexte = $_POST["nvTexte"];
-                $data=["textePost" => $nvTexte];
-                $firstPostId = $firstPost->getId();
-                $postManager->update($firstPostId, $data);
-
-                Session::addFlash('success','Topic modifié avec succès');
-
+                    Session::addFlash('success','Topic modifié avec succès');
+                }
+                else{
+                    Session::addFlash('error','Action Impossible');
+                }    
             }
             else{
                 Session::addFlash('error','Action Impossible');
@@ -262,17 +265,22 @@
             $userId = $topic->getUser()->getId();
 
             //On vérifie que l'utilisateur est bien l'auteur du topic
-            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
+            if(\App\Session::getUser()){
+                if(\App\Session::getUser()->getId() == $userId || \App\Session::isAdmin()){
 
-                //On supprime tous les messages du topic
-                $postManager = new PostManager();
-                $postManager->deletePostsByTopic($id);
-                
-                //On supprime le topic
-                $topicManager->delete($id);
+                    //On supprime tous les messages du topic
+                    $postManager = new PostManager();
+                    $postManager->deletePostsByTopic($id);
+                    
+                    //On supprime le topic
+                    $topicManager->delete($id);
 
-                //Message de validation
-                Session::addFlash('success','Topic supprimé avec succès');
+                    //Message de validation
+                    Session::addFlash('success','Topic supprimé avec succès');
+                }
+                else{
+                    Session::addFlash('error','Action Impossible');
+                }
             }
             else{
                 Session::addFlash('error','Action Impossible');
@@ -288,10 +296,15 @@
             $catId = $topicManager->findOneById($id)->getCategorie()->getId();
             $userId = $topicManager->findOneById($id)->getUser()->getId();
 
-            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
-                $data=["verrouTopic" => 1];
-                $topicManager->update($id, $data);
-                Session::addFlash('success','Topic verrouillé avec succès');
+            if(\App\Session::getUser()){
+                if(\App\Session::getUser()->getId() == $userId || \App\Session::isAdmin()){
+                    $data=["verrouTopic" => 1];
+                    $topicManager->update($id, $data);
+                    Session::addFlash('success','Topic verrouillé avec succès');
+                }
+                else{
+                    Session::addFlash('error','Action Impossible');
+                }
             }
             else{
                 Session::addFlash('error','Action Impossible');
@@ -306,10 +319,15 @@
             $catId = $topicManager->findOneById($id)->getCategorie()->getId();
             $userId = $topicManager->findOneById($id)->getUser()->getId();
 
-            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
-                $data=["verrouTopic" => 0];
-                $topicManager->update($id, $data);
-                Session::addFlash('success','Topic déverrouillé avec succès');
+            if(\App\Session::getUser()){
+                if(\App\Session::getUser()->getId() == $userId || \App\Session::isAdmin()){
+                    $data=["verrouTopic" => 0];
+                    $topicManager->update($id, $data);
+                    Session::addFlash('success','Topic déverrouillé avec succès');
+                }
+                else{
+                    Session::addFlash('error','Action Impossible');
+                }
             }
             else{
                 Session::addFlash('error','Action Impossible');

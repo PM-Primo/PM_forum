@@ -12,7 +12,6 @@
 </head>
 <body>
     <div id="wrapper"> 
-       
         <div id="mainpage">
             <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
             <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
