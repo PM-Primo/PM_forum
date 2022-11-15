@@ -35,15 +35,15 @@ foreach($posts as $post){
 <?php
 if(App\Session::getUser()){
     if(!$verrouTopic){?>
-    <form action="index.php?ctrl=forum&action=addPost&id=<?=$topicId?>" method="post" class="formulaire">
+    <form action="index.php?ctrl=forum&action=addPost&id=<?=$topicId?>" method="post" class="formulaireNvPost">
         <p>
             <label>
                 Message :<br>
-                <textarea name="textePost" rows="5" cols="45" required></textarea>        
+                <textarea name="textePost" rows="5" cols="45" class="champTxtPost" required></textarea>        
             </label>
         </p>
 
-        <div class="submit_wrapper">
+        <div class="submitWrapper">
             <input type="submit" name="submit" value="Répondre" class="submit">
         </div>
             
