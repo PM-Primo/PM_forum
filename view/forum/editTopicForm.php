@@ -8,22 +8,24 @@ $firstPost = $result["data"]['firstPost'];
 $firstPostTexte = $firstPost->getTextePost();
 ?>
 
-<form action="index.php?ctrl=forum&action=editTopic&id=<?=$topicId?>" method="post" class="formulaire">
-<p>
-        <label>
-            Titre du topic :<br>
-            <input type="text" name="nvTitre" class="champ_txt" value="<?=$titreTopic;?>" required>
-        </label>
-    </p>
+<div class="formWrapper">
+    <form action="index.php?ctrl=forum&action=editTopic&id=<?=$topicId?>" method="post" class="formulaireNvPost">
     <p>
-        <label>
-            Message :<br>
-            <textarea name="nvTexte" rows="5" cols="45" required><?=$firstPostTexte;?></textarea>        
-        </label>
-    </p>
+            <label>
+                Titre du topic :<br>
+                <input type="text" name="nvTitre" class="champTxt" value="<?=$titreTopic;?>" required>
+            </label>
+        </p>
+        <p>
+            <label>
+                Message :<br>
+                <textarea name="nvTexte" rows="5" cols="45" class="champTxtPost" required><?=$firstPostTexte;?></textarea>        
+            </label>
+        </p>
 
-    <div class="submit_wrapper">
-        <input type="submit" name="submit" value="Valider" class="submit">
-    </div>
-        
-</form>
+        <div class="submitWrapper">
+            <input type="submit" name="submit" value="Valider" class="submit">
+        </div>
+            
+    </form>
+</div>

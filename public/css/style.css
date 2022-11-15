@@ -116,6 +116,10 @@ nav a{
     font-size: 11pt;
 }
 
+.fa-message{
+    font-size: 9pt;
+}
+
 /*Pages Liste des posts*/
 .formulaireNvPost{
     margin-top: 20px;
