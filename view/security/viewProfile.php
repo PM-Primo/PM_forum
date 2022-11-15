@@ -7,4 +7,3 @@ $user = $result["data"]['user'];
 <p>Pseudo : <?=$user->getPseudoUser()?></p>
 <p>Adresse mail : <?=$user->getEmailUser()?></p>
 <p>Rôle : <?=$user->getRoleUser()?></p>
-<!--<p>Nombre de posts : <?=count($posts)?></p>-->

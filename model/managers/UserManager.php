@@ -49,36 +49,32 @@
             );
         }
 
-        public function viewProfile2($id){
-            $sql="SELECT id_user, emailUser, pseudoUser, roleUser, COUNT(distinct p.id_post) AS nbPostsUser, COUNT(distinct t.id_topic) AS nbTopicsUser
+        // public function viewProfile2($id){
+        //     $sql="SELECT *
+        //     FROM user u
+        //     WHERE id_user = :id";
+
+        //     return $this->getOneOrNullResult(
+        //         DAO::select($sql,['id' => $id], false), 
+        //         $this->className,
+                
+        //     );
+        // }
+
+        public function viewProfile($id){
+            $sql = "SELECT id_user, emailUser, mdpUser, pseudoUser, roleUser, COUNT(distinct p.id_post) AS nbPostsUser, COUNT(distinct t.id_topic) AS nbTopicsUser
             FROM user u
             LEFT JOIN post p ON u.id_user = p.user_id
             LEFT JOIN topic t ON u.id_user = t.user_id
             WHERE u.id_user = :id
             GROUP BY u.id_user
-            LIMIT 1";
+            ";   
 
             return $this->getOneOrNullResult(
-                DAO::select($sql,['id' => $id]), 
+                DAO::select($sql,['id' => $id], false), 
                 $this->className
             );
         }
-
-        // public function viewProfile($id){
-        //     $sql = "SELECT id_user, emailUser, mdpUser, pseudoUser, roleUser, COUNT(distinct p.id_post) AS nbPostsUser, COUNT(distinct t.id_topic) AS nbTopicsUser
-        //     FROM user u
-        //     LEFT JOIN post p ON u.id_user = p.user_id
-        //     LEFT JOIN topic t ON u.id_user = t.user_id
-        //     WHERE u.id_user = :id
-        //     GROUP BY u.id_user
-        //     LIMIT 1
-        //     ";   
-
-        //     return $this->getSingleScalarResult(
-        //         DAO::select($sql,['id' => $id]), 
-        //         $this->className
-        //     );
-        // }
 
     }
 ?>

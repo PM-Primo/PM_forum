@@ -152,7 +152,7 @@
             return [
                 "view" => VIEW_DIR."security/viewProfile.php",
                 "data" => [
-                    "user" => $userManager->viewProfile2($id),
+                    "user" => $userManager->viewProfile($id),
                 ]
             ];
         }

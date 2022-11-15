@@ -7,7 +7,7 @@ $catId=$categorie->getId();
 ?>
 <h1>Topics - <?= $categorie ?> : </h1>
 <?php if(App\Session::getUser()){ ?>
-    <a href="index.php?ctrl=forum&action=addTopicForm&id=<?=$catId?>" class="nvTopic">Nouveau topic<a>
+    <a href="index.php?ctrl=forum&action=addTopicForm&id=<?=$catId?>" class="nvTopic">Nouveau topic</a>
 <?php } ?>
 
 <?php
