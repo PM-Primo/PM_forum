@@ -14,7 +14,7 @@ $user = $result["data"]['user'];
             $strTopics = "<a href='index.php?ctrl=forum&action=topicsByUser&id=".$user->getId()."'>".$user->getNbTopicsUser()." topics créés</a>";
         }
         else if($user->getNbTopicsUser()==1){
-            $strTopics = "1 topic créé";
+            $strTopics = "<a href='index.php?ctrl=forum&action=topicsByUser&id=".$user->getId()."'>1 topic créé</a>";
         }
         else{
             $strTopics = "Aucun topic créé";
@@ -24,7 +24,7 @@ $user = $result["data"]['user'];
             $strPosts = "<a href='index.php?ctrl=forum&action=PostsByUser&id=".$user->getId()."'>".$user->getNbPostsUser()." messages rédigés</a>";
         }
         else if($user->getNbPostsUser()==1){
-            $strPosts = "1 message rédigé";
+            $strPosts = "<a href='index.php?ctrl=forum&action=PostsByUser&id=".$user->getId()."'>1 message rédigé</a>";
         }
         else{
             $strPosts = "Aucun message rédigé";

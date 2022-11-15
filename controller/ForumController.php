@@ -361,5 +361,30 @@
             }
         }
 
+        public function PostsByUser($id){
+            $postManager = new PostManager();
+            $userManager = new UserManager();
+
+            if(\App\Session::getUser()){
+
+                $posts = $postManager->postsByUser($id);
+                $user = $userManager->findOneById($id);
+
+                return [
+                    "view" => VIEW_DIR."forum/PostsByUser.php",
+                    "data" => [
+                        "posts" => $posts,
+                        "user" => $user,
+                    ]
+                ];
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
+                return [
+                    "view" => VIEW_DIR."home.php"
+                ];
+            }
+        }
+
     }
 ?>

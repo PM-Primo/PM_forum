@@ -51,17 +51,20 @@
             return DAO::delete($sql, ['id' => $id]);
         }   
 
-        public function findPostsByUser($id){
-            $sql = "SELECT *
+        public function PostsByUser($id){
+            $sql = "SELECT id_post, datePost, textePost, topic_id
                     FROM post
                     WHERE user_id = :id
-                    ORDER BY datePost ASC
+                    ORDER BY datePost DESC
                     ";
-
+            
             return $this->getMultipleResults(
                 DAO::select($sql,['id' => $id]), 
                 $this->className
             );
         }
     }
+
+
+    
 ?>
