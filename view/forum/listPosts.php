@@ -20,7 +20,7 @@ foreach($posts as $post){
     echo "<a href='index.php?ctrl=security&action=viewProfile&id=".$post->getUser()->getId()."'>".$post->getUser()."</a><br>";
     echo "(".$post->getDatePost().")<br>";
     if(\App\Session::getUser()){
-        if (\App\Session::getUser()->getId() == $post->getUser()->getId()){
+        if (\App\Session::getUser()->getId() == $post->getUser()->getId() || \App\Session::isAdmin()){
             echo "<a href='index.php?ctrl=forum&action=editPostForm&id=".$post->getId()."'>Éditer</a>";
             if($firstPost->getId() != $post->getId()){ //Pour empêcher que l'on puisse supprimer le premier post d'un topic
                 echo " / <a href='index.php?ctrl=forum&action=deletePost&id=".$post->getId()."'>Supprimer</a>";
@@ -34,20 +34,21 @@ foreach($posts as $post){
 ?>
 <?php
 if(App\Session::getUser()){
-    if(!$verrouTopic){?>
-    <form action="index.php?ctrl=forum&action=addPost&id=<?=$topicId?>" method="post" class="formulaireNvPost">
-        <p>
-            <label>
-                Message :<br>
-                <textarea name="textePost" rows="5" cols="45" class="champTxtPost" required></textarea>        
-            </label>
-        </p>
+    if(!$verrouTopic || \App\Session::isAdmin()){?>
+    <div class="formWrapper">
+        <form action="index.php?ctrl=forum&action=addPost&id=<?=$topicId?>" method="post" class="formulaireNvPost">
+            <p>
+                <label>
+                    Message :<br>
+                    <textarea name="textePost" rows="5" cols="45" class="champTxtPost" required></textarea>        
+                </label>
+            </p>
 
-        <div class="submitWrapper">
-            <input type="submit" name="submit" value="Répondre" class="submit">
-        </div>
-            
-    </form>
+            <div class="submitWrapper">
+                <input type="submit" name="submit" value="Répondre" class="submit">
+            </div>
+        </form>
+    </div>
 <?php }
     else {
         echo "TOPIC VERROUILLÉ ! &nbsp<i class='fa-solid fa-lock'></i>";

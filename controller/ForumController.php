@@ -154,12 +154,17 @@
             $postManager = new PostManager();
             $userId=$postManager->findOneById($id)->getUser()->getId();
 
-            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId){
+            if(\App\Session::getUser()){
+                if(\App\Session::getUser()->getId() == $userId || \App\Session::isAdmin()){
                 $nvTexte = $_POST["nvTextePost"];
                 $data=["textePost" => $nvTexte];
                 $postManager->update($id, $data);
 
                 Session::addFlash('success','Message modifié avec succès');
+                }
+                else{
+                    Session::addFlash('error','Action Impossible');
+                }
             }
             else{
                 Session::addFlash('error','Action Impossible');
@@ -176,9 +181,19 @@
             $userId = $postManager->findOneById($id)->getUser()->getId();
             $firstPostId= $postManager->findFirstPostByTopic($idTopic)->getId();
 
-            if(\App\Session::getUser() && \App\Session::getUser()->getId() == $userId && $id != $firstPostId){
-                $postManager->delete($id);
-                Session::addFlash('success','Message supprimé avec succès');
+            if($id != $firstPostId){
+                if(\App\Session::getUser()){
+                    if(\App\Session::getUser()->getId() == $userId || \App\Session::isAdmin()){
+                        $postManager->delete($id);
+                        Session::addFlash('success','Message supprimé avec succès');
+                    }
+                    else{
+                        Session::addFlash('error','Action Impossible');
+                    }
+                }
+                else{
+                    Session::addFlash('error','Action Impossible');
+                }
             }
             else{
                 Session::addFlash('error','Action Impossible');
