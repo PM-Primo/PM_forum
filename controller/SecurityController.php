@@ -90,11 +90,14 @@
                         if (password_verify($mdpUser, $mdpHash)){ //on vérifie que le mdp hashé en bdd & le mdp entré sont identiques
                             
                             $user = $userManager->findOneByEmail($emailUser); //on va rechercher l'utilisateur associé
-                            // var_dump($user);
-                            // die;
-                            Session::setUser($user);
-                            Session::addFlash('success','Bienvenue '.$user->getPseudoUser());
-                            return ["view" => VIEW_DIR."home.php"];
+                            if($user->getRoleUser()!='Banni'){
+                                Session::setUser($user);
+                                Session::addFlash('success','Bienvenue '.$user->getPseudoUser());
+                                return ["view" => VIEW_DIR."home.php"];
+                            }
+                            else{
+                                Session::addFlash('error','Vous avez été banni du forum, contactez un Admin pour plus d\'informations');
+                            }
                         }
                         else{
                             Session::addFlash('error','Mot de passe incorrect');
