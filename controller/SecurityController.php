@@ -152,8 +152,33 @@
                     "user" => $userManager->viewProfile2($id),
                 ]
             ];
+        }
 
-        
+        public function banUser($id){
+
+            $userManager = new UserManager();
+
+            if(\App\Session::isAdmin() && \App\Session::getUser()->getId() != $id){
+                $data = ['roleUser' => 'Banni'];
+                $userManager->update($id, $data);
+            }
+            else {
+                Session::addFlash('error','Action impossible');
+            }
+            $this->redirectTo("security", "listUsers");
+        }
+
+        public function unbanUser($id){
+
+            $userManager = new UserManager();
+            if(\App\Session::isAdmin() && \App\Session::getUser()->getId() != $id){
+                $data = ['roleUser' => 'Utilisateur'];
+                $userManager->update($id, $data);
+            }
+            else {
+                Session::addFlash('error','Action impossible');
+            }
+            $this->redirectTo("security", "listUsers");
         }
 
     }
