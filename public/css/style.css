@@ -33,6 +33,10 @@ a{
     position: relative;
 }
 
+li{
+    list-style: none;
+}
+
 /*Petit effet d'animation des liens*/
 
 a::after {
@@ -192,6 +196,12 @@ nav a{
 /*Profil*/
 .detailsProfil{
     line-height: 30pt;
+}
+
+.listProfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
    
 /*Footer*/

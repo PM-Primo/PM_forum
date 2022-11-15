@@ -336,5 +336,30 @@
             $this->redirectTo("forum", "listTopics", $catId);
         }
 
+        public function topicsByUser($id){
+            $topicManager = new TopicManager();
+            $userManager = new UserManager();
+
+            if(\App\Session::getUser()){
+
+                $topics = $topicManager->topicsByUser($id);
+                $user = $userManager->findOneById($id);
+
+                return [
+                    "view" => VIEW_DIR."forum/TopicsByUser.php",
+                    "data" => [
+                        "topics" => $topics,
+                        "user" => $user,
+                    ]
+                ];
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
+                return [
+                    "view" => VIEW_DIR."home.php"
+                ];
+            }
+        }
+
     }
 ?>

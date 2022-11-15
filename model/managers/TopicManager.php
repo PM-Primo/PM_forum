@@ -28,5 +28,20 @@
                 $this->className
             );
         }
+
+        public function topicsByUser($id){
+            $sql = "SELECT t.id_topic, t.titreTopic, t.dateCreaTopic, t.verrouTopic, t.user_id, COUNT(p.topic_id) AS nbPostsTopic, t.categorie_id
+                    FROM topic t
+                    LEFT JOIN post p ON t.id_topic = p.topic_id
+                    WHERE t.user_id = :id
+                    GROUP BY t.id_topic
+                    ORDER BY t.dateCreaTopic DESC
+                    ";
+            
+            return $this->getMultipleResults(
+                DAO::select($sql,['id' => $id]), 
+                $this->className
+            );
+        }
     }
 ?>
