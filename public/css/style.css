@@ -188,6 +188,11 @@ nav a{
     color:rgb(249,245,229);
     background-position: left bottom;
 }
+
+/*Profil*/
+.detailsProfil{
+    line-height: 30pt;
+}
    
 /*Footer*/
 footer{
