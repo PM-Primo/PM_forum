@@ -11,7 +11,7 @@ $verrouTopic = $topic->getVerrouTopic();
 ?>
 
 <a href="index.php?ctrl=forum&action=listTopics&id=<?= $catId ?>"><i class="fa-solid fa-arrow-left"></i> <?= $catNom?></a>
-<h1><?= $topic ?></h1>
+<h1><?php echo $topic; if($verrouTopic){echo "&nbsp&nbsp<i class='fa-solid fa-lock'></i>";} ?></h1>
 
 
 <?php
@@ -50,6 +50,6 @@ if(App\Session::getUser()){
     </form>
 <?php }
     else {
-        echo "TOPIC VERROUILLÉ !";
+        echo "TOPIC VERROUILLÉ ! &nbsp<i class='fa-solid fa-lock'></i>";
     }
 } ?>

@@ -27,7 +27,7 @@
             </label>
         </p>
 
-        <div class="submit_wrapper">
+        <div class="submitWrapper">
             <input type="submit" name="submit" value="Valider" class="submit">
         </div>
             
