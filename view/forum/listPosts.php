@@ -17,7 +17,7 @@ $verrouTopic = $topic->getVerrouTopic();
 <?php
 foreach($posts as $post){
 
-    echo $post->getUser()."<br>";
+    echo "<a href='index.php?ctrl=security&action=viewProfile&id=".$post->getUser()->getId()."'>".$post->getUser()."</a><br>";
     echo "(".$post->getDatePost().")<br>";
     if(\App\Session::getUser()){
         if (\App\Session::getUser()->getId() == $post->getUser()->getId()){

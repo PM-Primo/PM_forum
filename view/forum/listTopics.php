@@ -7,13 +7,13 @@ $catId=$categorie->getId();
 ?>
 <h1>Topics - <?= $categorie ?> : </h1>
 <?php if(App\Session::getUser()){ ?>
-    <a href="index.php?ctrl=forum&action=addTopicForm&id=<?=$catId?>">Nouveau topic<a>
+    <a href="index.php?ctrl=forum&action=addTopicForm&id=<?=$catId?>" class="nvTopic">Nouveau topic<a>
 <?php } ?>
 
 <?php
 if($topics){
     foreach($topics as $topic){
-        echo "<p class='uniteTopic'><a href='index.php?ctrl=forum&action=listPosts&id=".$topic->getId()."'>".$topic->getTitreTopic()."</a>";
+        echo "<div class='uniteTopic'><a href='index.php?ctrl=forum&action=listPosts&id=".$topic->getId()."'>".$topic->getTitreTopic()."</a>";
         if ($topic->getVerrouTopic()){
             echo "&nbsp&nbsp<i class='fa-solid fa-lock'></i>";
         } 
@@ -31,7 +31,9 @@ if($topics){
                 echo "]";
             } 
         }   
-        echo "<br>Date ".$topic->getDateCreaTopic()." - Auteur :  ".$topic->getUser()." - ".$topic->getNbPostsTopic()." Réponses</p>";
+        echo "<br><div class='detailsTopic'>".$topic->getDateCreaTopic()." - 
+        <a href='index.php?ctrl=security&action=viewProfile&id=".$topic->getUser()->getId()."'>".$topic->getUser()."</a> -
+         ".$topic->getNbPostsTopic()." <i class='fa-solid fa-message'></i></div></div>";
     }
 }
 else{

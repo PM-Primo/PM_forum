@@ -97,6 +97,15 @@ nav a{
     margin : 20px 0 20px 0;
 }
 
+.nvTopic{
+    margin-bottom : 20px;
+}
+
+.detailsTopic{
+    font-style: italic;
+    font-size: 11pt;
+}
+
 /*Sign-in & Log-in*/
 
 .formWrapper{
