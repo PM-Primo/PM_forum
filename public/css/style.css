@@ -144,6 +144,16 @@ nav a{
     background-color: rgb(249,245,229) ;
 }
 
+h1 .fa-solid{
+    color : black;
+}
+
+.topicFunctions{
+    text-align: center;
+    margin-top: -70px;
+    margin-bottom: 80px;
+}
+
 
 /*Sign-in & Log-in*/
 

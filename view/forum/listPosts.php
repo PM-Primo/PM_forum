@@ -15,6 +15,21 @@ $verrouTopic = $topic->getVerrouTopic();
 
 
 <?php
+if(\App\Session::getUser()){
+    if (\App\Session::getUser()->getId() == $topic->getUser()->getId()||\App\Session::isAdmin()){
+        echo "<div class='topicFunctions'><a href='index.php?ctrl=forum&action=editTopicForm&id=".$topicId."'><i class='fa-solid fa-pen-to-square'></i></a>&nbsp
+        <a href='index.php?ctrl=forum&action=deleteTopic&id=".$topicId."'><i class='fa-solid fa-trash'></i></a>&nbsp&nbsp";
+                
+        if($verrouTopic){
+            echo "<a href='index.php?ctrl=forum&action=unlockTopic&id=".$topicId."'><i class='fa-solid fa-lock-open'></i></a>";
+        }
+        else{
+            echo "<a href='index.php?ctrl=forum&action=lockTopic&id=".$topicId."'><i class='fa-solid fa-lock'></i></a>";
+        }
+        echo "</div>";
+    } 
+}   
+
 foreach($posts as $post){
 
     echo "<a href='index.php?ctrl=security&action=viewProfile&id=".$post->getUser()->getId()."'>".$post->getUser()."</a><br>";

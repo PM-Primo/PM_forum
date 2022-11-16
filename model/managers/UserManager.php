@@ -49,18 +49,6 @@
             );
         }
 
-        // public function viewProfile2($id){
-        //     $sql="SELECT *
-        //     FROM user u
-        //     WHERE id_user = :id";
-
-        //     return $this->getOneOrNullResult(
-        //         DAO::select($sql,['id' => $id], false), 
-        //         $this->className,
-                
-        //     );
-        // }
-
         public function viewProfile($id){
             $sql = "SELECT id_user, emailUser, mdpUser, pseudoUser, roleUser, COUNT(distinct p.id_post) AS nbPostsUser, COUNT(distinct t.id_topic) AS nbTopicsUser
             FROM user u
