@@ -19,6 +19,7 @@
                 Mot de passe :<br>
                 <input type="password" name="mdpUser" class="champTxt" minlength="8" required>
             </label>
+            <div class="tinyTxt">8 caractères minimum</div>
         </p>
         <p>
             <label>
