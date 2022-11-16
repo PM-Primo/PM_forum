@@ -2,9 +2,14 @@
 $user = $result["data"]['user'];
 ?>
 
-<h1>Profil de <?=$user->getPseudoUser()?></h1>
+<h1><?=$user->getPseudoUser()?></h1>
 
 <div class="listProfil">
+    <figure class="ppFigureProfil">
+        <div class="ppImgBox">
+            <img src="<?=$user->getPpUser()?>" alt="photo de profil">
+        </div>
+    </figure>
     <ul class="detailsProfil">
         <li>Pseudo : <?=$user->getPseudoUser()?></li>
         <li>Adresse mail : <?=$user->getEmailUser()?></li>

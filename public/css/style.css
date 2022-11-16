@@ -254,6 +254,24 @@ h1 .fa-solid{
     transform: none;
 }
 
+.ppFigureProfil{
+    width:200px;
+    margin-top : -20px;
+    margin-bottom: 40px;
+}
+
+.ppImgBox{
+    overflow: hidden;
+}
+
+.ppImgBox img {
+    width: 100%;
+    border-radius: 50%;
+    display: block; /*Pour ne pas avoir des petits espaces moches en bas des images*/
+}
+
+/*Il faudra faire un object-fit dans le cas où l'utilisateur importe une pp rectangulaire*/
+
 /*Footer*/
 footer{
     position: relative;

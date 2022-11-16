@@ -50,7 +50,7 @@
         }
 
         public function viewProfile($id){
-            $sql = "SELECT id_user, emailUser, mdpUser, pseudoUser, roleUser, COUNT(distinct p.id_post) AS nbPostsUser, COUNT(distinct t.id_topic) AS nbTopicsUser
+            $sql = "SELECT id_user, emailUser, mdpUser, pseudoUser, roleUser, ppUser, COUNT(distinct p.id_post) AS nbPostsUser, COUNT(distinct t.id_topic) AS nbTopicsUser
             FROM user u
             LEFT JOIN post p ON u.id_user = p.user_id
             LEFT JOIN topic t ON u.id_user = t.user_id

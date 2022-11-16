@@ -263,6 +263,8 @@
                     }
                     else{
                         Session::addFlash('error','Les deux mots de passe saisis doivent être identiques');
+                        $this->redirectTo("security", "changeUserMdpForm", $id);
+
                     }
                 }
                 else{

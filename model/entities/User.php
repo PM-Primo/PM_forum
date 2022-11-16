@@ -10,6 +10,7 @@
         private $mdpUser;
         private $pseudoUser;
         private $roleUser;
+        private $ppUser;
         private $nbPostsUser; // non mappé
         private $nbTopicsUser; // non mappé
 
@@ -79,6 +80,15 @@
 
         public function setNbTopicsUser($nvNbTopics){
             $this->nbTopicsUser = $nvNbTopics;
+            return $this;
+        }
+
+        public function getPpUser(){
+            return $this->ppUser;
+        }
+
+        public function setPpUser($nvpp){
+            $this->ppUser = $nvpp;
             return $this;
         }
 
