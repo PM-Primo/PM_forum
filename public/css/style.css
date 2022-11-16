@@ -110,6 +110,12 @@ nav a{
     line-height: 40pt;
 }
 
+.nvCat{
+    text-align: center;
+    font-size: 12pt;
+    margin-bottom: 20px;
+}
+
 /*Pages Liste des topics*/
 .uniteTopic{
     margin : 20px 0 20px 0;

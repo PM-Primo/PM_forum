@@ -386,5 +386,34 @@
             }
         }
 
+        public function addCategorieForm(){
+            return [
+                "view" => VIEW_DIR."forum/addCategorieForm.php"
+            ];
+        }
+
+        public function addCategorie(){
+
+            if(\App\Session::getUser()){
+                if(\App\Session::isAdmin()){
+                    $categorieManager = new CategorieManager();
+                    $nvCategorie = $_POST["nvCategorie"];
+                    $data=["nomCategorie" => $nvCategorie];
+                    $nvCatId = $categorieManager->add($data);
+        
+                    $categorieManager->update($nvCatId, ["orderCategorie" => $nvCatId]);
+                    Session::addFlash('success','Catégorie ajoutée');
+                }
+                else{
+                    Session::addFlash('error','Action Impossible');
+                }
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
+            }
+
+            $this->redirectTo("forum", "listCategories");
+        }
+
     }
 ?>

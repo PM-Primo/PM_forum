@@ -8,6 +8,12 @@ $categories = $result["data"]['categories'];
 
 <div class="catListe">
     <?php
+    if(\App\Session::getUser()){
+        if(\App\Session::isAdmin()){
+            echo "<a href='index.php?ctrl=forum&action=addCategorieForm' class='nvCat'>+ Nouvelle Catégorie</a>";
+        }
+    }
+
     foreach($categories as $categorie ){
 
         ?>
