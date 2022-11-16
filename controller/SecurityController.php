@@ -239,5 +239,42 @@
             $this->redirectTo("security", "viewProfile", $id);
         }
 
+        public function changeUserMdpForm($id){
+            return [
+                "view" => VIEW_DIR."security/changeUserMdpForm.php",
+            ];
+        }
+
+        public function changeUserMdp($id){
+
+            $mdpUser = filter_input(INPUT_POST, "mdpUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $mdpUser2 = filter_input(INPUT_POST, "mdpUser2", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            if(\App\Session::getUser()){
+                if(\App\Session::getUser()->getId() == $id){
+                    if ($mdpUser == $mdpUser2 && strlen($mdpUser)>=8){
+                        
+                        $mdpHash = password_hash($mdpUser, PASSWORD_DEFAULT);
+                        $userManager = new UserManager();
+                        $data = ["mdpUser" => $mdpHash];
+                        $userManager->update($id, $data);
+
+                        Session::addFlash('success','Mot de passe modifié');
+                    }
+                    else{
+                        Session::addFlash('error','Les deux mots de passe saisis doivent être identiques');
+                    }
+                }
+                else{
+                    Session::addFlash('error','Action impossible');
+                }
+            }
+            else{
+                Session::addFlash('error','Action impossible');
+            }
+
+            $this->redirectTo("security", "viewProfile", $id);
+        }
+
     }
 ?>

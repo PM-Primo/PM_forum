@@ -57,7 +57,8 @@ $user = $result["data"]['user'];
     <?php 
     if(\App\Session::getUser()){
         if(\App\Session::getUser()->getId() == $user->getId()){
-            echo "<div class='btnWrapper'><a href='index.php?ctrl=security&action=changeUserInfoForm&id=".$user->getId()."' class='submit'>Modifier mes informations</a></div>";
+            echo "<div class='submitWrapper'><a href='index.php?ctrl=security&action=changeUserInfoForm&id=".$user->getId()."' class='submit'>Modifier les informations</a>";
+            echo "<br><a href='index.php?ctrl=security&action=changeUserMdpForm&id=".$user->getId()."' class='submit'>Modifier le mot de passe</a></div>";
         }
     }
     ?>
