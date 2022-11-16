@@ -17,7 +17,17 @@ $categories = $result["data"]['categories'];
     foreach($categories as $categorie ){
 
         ?>
-        <p><a href="index.php?ctrl=forum&action=listTopics&id=<?=$categorie->getId()?>"><?=$categorie->getNomCategorie()?></a></p>
+        <p>
+            <a href="index.php?ctrl=forum&action=listTopics&id=<?=$categorie->getId()?>"><?=$categorie->getNomCategorie()?></a>
+            <?php 
+            if(\App\Session::getUser()){
+                if(\App\Session::isAdmin()){
+                    echo "&nbsp&nbsp<a href='index.php?ctrl=forum&action=editCategorieForm&id=".$categorie->getId()."'><i class='fa-solid fa-pen-to-square'></i></a>&nbsp
+                    <a href='index.php?ctrl=forum&action=deleteCategorie&id=".$categorie->getId()."'><i class='fa-solid fa-trash'></i></a>";
+                }
+            }
+            ?>
+        </p>
         <?php
     }
     ?>

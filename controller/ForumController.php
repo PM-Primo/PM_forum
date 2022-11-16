@@ -6,7 +6,8 @@
     use App\AbstractController;
     use App\ControllerInterface;
     use DateTime;
-    use Model\Managers\TopicManager;
+use Model\Entities\Categorie;
+use Model\Managers\TopicManager;
     use Model\Managers\CategorieManager;
     use Model\Managers\PostManager;
     use Model\Managers\UserManager;
@@ -156,7 +157,9 @@
 
             if(\App\Session::getUser()){
                 if(\App\Session::getUser()->getId() == $userId || \App\Session::isAdmin()){
-                $nvTexte = $_POST["nvTextePost"];
+                $nvTexte = filter_input(INPUT_POST, "nvTextePost", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                
                 $data=["textePost" => $nvTexte];
                 $postManager->update($id, $data);
 
@@ -228,7 +231,8 @@
             if(\App\Session::getUser()){
                 if(\App\Session::getUser()->getId() == $userId || \App\Session::isAdmin()){
                     //On met à jour le titre du topic
-                    $nvTitre = $_POST["nvTitre"];
+                    $nvTitre = filter_input(INPUT_POST, "nvTitre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
                     $data=["titreTopic" => $nvTitre];
                     $topicManager->update($id, $data);
 
@@ -237,7 +241,8 @@
                     $firstPost = $postManager->findFirstPostByTopic($id);
 
                     //Et on en change le texte
-                    $nvTexte = $_POST["nvTexte"];
+                    $nvTexte = filter_input(INPUT_POST, "nvTexte", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
                     $data=["textePost" => $nvTexte];
                     $firstPostId = $firstPost->getId();
                     $postManager->update($firstPostId, $data);
@@ -397,7 +402,8 @@
             if(\App\Session::getUser()){
                 if(\App\Session::isAdmin()){
                     $categorieManager = new CategorieManager();
-                    $nvCategorie = $_POST["nvCategorie"];
+                    $nvCategorie = filter_input(INPUT_POST, "nvCategorie", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
                     $data=["nomCategorie" => $nvCategorie];
                     $nvCatId = $categorieManager->add($data);
         
@@ -412,6 +418,27 @@
                 Session::addFlash('error','Action Impossible');
             }
 
+            $this->redirectTo("forum", "listCategories");
+        }
+
+        public function editCategorieForm($id){
+
+            $categorieManager = new CategorieManager();
+            $categorie = $categorieManager->findOneById($id);
+
+            return [
+                "view" => VIEW_DIR."forum/editCategorieForm.php",
+                "data" => [
+                    "categorie" => $categorie
+                ]
+            ];
+        }
+
+        public function editCategorie($id){
+            $categorieManager = new CategorieManager();
+            $nvTitre = filter_input(INPUT_POST, "nvTitreCat", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $data = ["nomCategorie"=>$nvTitre];
+            $categorieManager->update($id, $data);
             $this->redirectTo("forum", "listCategories");
         }
 
