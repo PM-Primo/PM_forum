@@ -11,20 +11,20 @@ $user = $result["data"]['user'];
         <li>Rôle : <?=$user->getRoleUser()?></li>
         <?php 
         if($user->getNbTopicsUser()>1){
-            $strTopics = "<a href='index.php?ctrl=forum&action=topicsByUser&id=".$user->getId()."'>".$user->getNbTopicsUser()." topics créés</a>";
+            $strTopics = "<a href='index.php?ctrl=forum&action=topicsByUser&id=".$user->getId()."' class='lien'>".$user->getNbTopicsUser()." topics créés</a>";
         }
         else if($user->getNbTopicsUser()==1){
-            $strTopics = "<a href='index.php?ctrl=forum&action=topicsByUser&id=".$user->getId()."'>1 topic créé</a>";
+            $strTopics = "<a href='index.php?ctrl=forum&action=topicsByUser&id=".$user->getId()."' class='lien'>1 topic créé</a>";
         }
         else{
             $strTopics = "Aucun topic créé";
         }
 
         if($user->getNbPostsUser()>1){
-            $strPosts = "<a href='index.php?ctrl=forum&action=PostsByUser&id=".$user->getId()."'>".$user->getNbPostsUser()." messages rédigés</a>";
+            $strPosts = "<a href='index.php?ctrl=forum&action=PostsByUser&id=".$user->getId()."' class='lien'>".$user->getNbPostsUser()." messages rédigés</a>";
         }
         else if($user->getNbPostsUser()==1){
-            $strPosts = "<a href='index.php?ctrl=forum&action=PostsByUser&id=".$user->getId()."'>1 message rédigé</a>";
+            $strPosts = "<a href='index.php?ctrl=forum&action=PostsByUser&id=".$user->getId()."' class='lien'>1 message rédigé</a>";
         }
         else{
             $strPosts = "Aucun message rédigé";
@@ -38,19 +38,27 @@ $user = $result["data"]['user'];
         if(\App\Session::getUser()){
             if($user->getId() != \App\Session::getUser()->getId() && \App\Session::isAdmin()){
                 if($user->getRoleUser() != 'Banni'){
-                    echo " <a href='index.php?ctrl=security&action=banUser&id=".$user->getId()."'>[Bannir]</a>&nbsp&nbsp&nbsp&nbsp";
+                    echo " <a href='index.php?ctrl=security&action=banUser&id=".$user->getId()."' class='lien'>[Bannir]</a>&nbsp&nbsp&nbsp&nbsp";
                 }
                 else{
-                    echo " <a href='index.php?ctrl=security&action=setUser&id=".$user->getId()."'>[Dé-bannir]</a>&nbsp&nbsp&nbsp&nbsp";
+                    echo " <a href='index.php?ctrl=security&action=setUser&id=".$user->getId()."' class='lien'>[Dé-bannir]</a>&nbsp&nbsp&nbsp&nbsp";
                 }
                 if($user->getRoleUser() != 'Admin'){
-                    echo " <a href='index.php?ctrl=security&action=setAdmin&id=".$user->getId()."'>[Rendre Admin]</a>";
+                    echo " <a href='index.php?ctrl=security&action=setAdmin&id=".$user->getId()."' class='lien'>[Rendre Admin]</a>";
                 }
                 else{
-                    echo " <a href='index.php?ctrl=security&action=setUser&id=".$user->getId()."'>[Retirer les fonctions Admin]</a>";
+                    echo " <a href='index.php?ctrl=security&action=setUser&id=".$user->getId()."' class='lien'>[Retirer les fonctions Admin]</a>";
                 }
             }
         }
     ?>
     </div>
+
+    <?php 
+    if(\App\Session::getUser()){
+        if(\App\Session::getUser()->getId() == $user->getId()){
+            echo "<div class='btnWrapper'><a href='index.php?ctrl=security&action=changeUserInfoForm&id=".$user->getId()."' class='submit'>Modifier mes informations</a></div>";
+        }
+    }
+    ?>
 </div>

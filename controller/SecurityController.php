@@ -198,5 +198,46 @@
             $this->redirectTo("security", "viewProfile", $id);
         }
 
+        public function changeUserInfoForm($id){
+            $userManager = new UserManager();
+            $user = $userManager->findOneById($id);
+
+            return [
+                "view" => VIEW_DIR."security/changeUserInfoForm.php",
+                "data" => [
+                    "user" => $user,
+                ]
+            ];
+        }
+
+        public function cancelChangeUserInfo($id){
+            $this->redirectTo("security", "viewProfile", $id);
+        }
+
+        public function ChangeUserInfo($id){
+
+
+            if(\App\Session::getUser()){
+                if(\App\Session::getUser()->getId() == $id){
+                    
+                    $userManager = new UserManager();
+                    $emailUser = filter_input(INPUT_POST, "emailUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    $pseudoUser = filter_input(INPUT_POST, "pseudoUser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    $data = ["emailUser" => $emailUser, "pseudoUser" => $pseudoUser];
+                    $userManager->update($id, $data);
+
+                    Session::addFlash('success','Informations modifiés');
+                }
+                else{
+                    Session::addFlash('error','Action impossible');
+                }
+            }
+            else{
+                Session::addFlash('error','Action impossible');
+            }
+
+            $this->redirectTo("security", "viewProfile", $id);
+        }
+
     }
 ?>

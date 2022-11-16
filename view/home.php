@@ -4,8 +4,8 @@
 <?php if(!App\Session::getUser()){ ?>
 <br><br><br>
 <p class="homeLiens">
-    <a href="index.php?ctrl=security&action=loginForm">Se connecter</a>
+    <a href="index.php?ctrl=security&action=loginForm" class="lien">Se connecter</a>
     <span>&nbsp;-&nbsp;</span>
-    <a href="index.php?ctrl=security&action=addUserForm">S'inscrire</a>
+    <a href="index.php?ctrl=security&action=addUserForm" class="lien">S'inscrire</a>
 </p>
 <?php } ?>

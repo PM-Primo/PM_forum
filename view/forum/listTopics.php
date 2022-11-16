@@ -20,7 +20,7 @@ if($topics){
             echo "<i class='fa-solid fa-lock'></i>&nbsp&nbsp";
         } 
 
-        echo "<a href='index.php?ctrl=forum&action=listPosts&id=".$topic->getId()."'>".$topic->getTitreTopic()."</a>";
+        echo "<a href='index.php?ctrl=forum&action=listPosts&id=".$topic->getId()."' class='lien'>".$topic->getTitreTopic()."</a>";
 
         if(\App\Session::getUser()){
             if (\App\Session::getUser()->getId() == $topic->getUser()->getId()||\App\Session::isAdmin()){
@@ -38,7 +38,7 @@ if($topics){
         }   
 
         echo "<br><div class='detailsTopic'>".$topic->getDateCreaTopic()." - 
-        <a href='index.php?ctrl=security&action=viewProfile&id=".$topic->getUser()->getId()."'>".$topic->getUser()."</a> -
+        <a href='index.php?ctrl=security&action=viewProfile&id=".$topic->getUser()->getId()."' class='lien'>".$topic->getUser()."</a> -
          ".$topic->getNbPostsTopic()." <i class='fa-solid fa-message'></i></div></div>";
     }
 }

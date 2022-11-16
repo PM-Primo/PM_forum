@@ -18,7 +18,7 @@ $categories = $result["data"]['categories'];
 
         ?>
         <p>
-            <a href="index.php?ctrl=forum&action=listTopics&id=<?=$categorie->getId()?>"><?=$categorie->getNomCategorie()?></a>
+            <a href="index.php?ctrl=forum&action=listTopics&id=<?=$categorie->getId()?>" class='lien'><?=$categorie->getNomCategorie()?></a>
             <?php 
             if(\App\Session::getUser()){
                 if(\App\Session::isAdmin()){

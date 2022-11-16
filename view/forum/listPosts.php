@@ -10,7 +10,7 @@ $verrouTopic = $topic->getVerrouTopic();
 
 ?>
 
-<a href="index.php?ctrl=forum&action=listTopics&id=<?= $catId ?>"><i class="fa-solid fa-arrow-left"></i> <?= $catNom?></a>
+<a href="index.php?ctrl=forum&action=listTopics&id=<?= $catId ?>" class='lien'><i class="fa-solid fa-arrow-left"></i> <?= $catNom?></a>
 <h1><?php echo $topic; if($verrouTopic){echo "&nbsp&nbsp<i class='fa-solid fa-lock'></i>";} ?></h1>
 
 
@@ -32,7 +32,7 @@ if(\App\Session::getUser()){
 
 foreach($posts as $post){
 
-    echo "<a href='index.php?ctrl=security&action=viewProfile&id=".$post->getUser()->getId()."'>".$post->getUser()."</a><br>";
+    echo "<a href='index.php?ctrl=security&action=viewProfile&id=".$post->getUser()->getId()."' class='lien'>".$post->getUser()."</a><br>";
     echo "(".$post->getDatePost().")<br>";
     echo $post."<br>";
     if(\App\Session::getUser()){
