@@ -436,9 +436,46 @@ use Model\Managers\TopicManager;
 
         public function editCategorie($id){
             $categorieManager = new CategorieManager();
-            $nvTitre = filter_input(INPUT_POST, "nvTitreCat", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $data = ["nomCategorie"=>$nvTitre];
-            $categorieManager->update($id, $data);
+            if(\App\Session::getUser()){
+                if(\App\Session::isAdmin()){
+                    $nvTitre = filter_input(INPUT_POST, "nvTitreCat", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    $data = ["nomCategorie"=>$nvTitre];
+                    $categorieManager->update($id, $data);
+                }
+                else{
+                    Session::addFlash('error','Action Impossible');
+                }
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
+            }
+            $this->redirectTo("forum", "listCategories");
+        }
+
+        public function deleteCategorie($id){
+            $categorieManager = new CategorieManager;
+            $topicManager = new TopicManager;
+
+            if(\App\Session::getUser()){
+                if(\App\Session::isAdmin()){
+
+                    $topics=$topicManager->listTopics($id);
+                    foreach($topics as $topic){
+                        $postManager = new PostManager;
+                        $postManager->deletePostsByTopic($topic->getId());
+                        $topicManager->delete($topic->getId());
+                    }
+
+                    $categorieManager->delete($id);
+
+                }
+                else{
+                    Session::addFlash('error','Action Impossible');
+                }
+            }
+            else{
+                Session::addFlash('error','Action Impossible');
+            }
             $this->redirectTo("forum", "listCategories");
         }
 
