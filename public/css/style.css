@@ -37,6 +37,10 @@ li{
     list-style: none;
 }
 
+textarea {
+    resize: none;
+ }
+
 /*Petit effet d'animation des liens*/
 
 a::after {
@@ -103,7 +107,7 @@ nav a{
 .catListe{
     text-align: center;
     font-size: 16pt;
-    line-height: 26pt;
+    line-height: 40pt;
 }
 
 /*Pages Liste des topics*/
@@ -202,6 +206,10 @@ nav a{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.changeRole{
+    margin-top: 100px;
 }
    
 /*Footer*/

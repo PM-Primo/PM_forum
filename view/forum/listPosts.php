@@ -19,16 +19,17 @@ foreach($posts as $post){
 
     echo "<a href='index.php?ctrl=security&action=viewProfile&id=".$post->getUser()->getId()."'>".$post->getUser()."</a><br>";
     echo "(".$post->getDatePost().")<br>";
+    echo $post."<br>";
     if(\App\Session::getUser()){
         if (\App\Session::getUser()->getId() == $post->getUser()->getId() || \App\Session::isAdmin()){
-            echo "<a href='index.php?ctrl=forum&action=editPostForm&id=".$post->getId()."'>Éditer</a>";
+            echo "<a href='index.php?ctrl=forum&action=editPostForm&id=".$post->getId()."'><i class='fa-solid fa-pen-to-square'></i></a>";
             if($firstPost->getId() != $post->getId()){ //Pour empêcher que l'on puisse supprimer le premier post d'un topic
-                echo " / <a href='index.php?ctrl=forum&action=deletePost&id=".$post->getId()."'>Supprimer</a>";
+                echo "&nbsp&nbsp<a href='index.php?ctrl=forum&action=deletePost&id=".$post->getId()."'><i class='fa-solid fa-trash'></i></a>";
             }
             echo "<br>";
         }
     }
-    echo $post."<br><br>";
+    echo "<br>";
     
 }
 ?>

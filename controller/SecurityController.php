@@ -168,10 +168,10 @@
             else {
                 Session::addFlash('error','Action impossible');
             }
-            $this->redirectTo("security", "listUsers");
+            $this->redirectTo("security", "viewProfile", $id);
         }
 
-        public function unbanUser($id){
+        public function setUser($id){
 
             $userManager = new UserManager();
             if(\App\Session::isAdmin() && \App\Session::getUser()->getId() != $id){
@@ -181,7 +181,21 @@
             else {
                 Session::addFlash('error','Action impossible');
             }
-            $this->redirectTo("security", "listUsers");
+            $this->redirectTo("security", "viewProfile", $id);
+        }
+
+        public function setAdmin($id){
+
+            $userManager = new UserManager();
+
+            if(\App\Session::isAdmin() && \App\Session::getUser()->getId() != $id){
+                $data = ['roleUser' => 'Admin'];
+                $userManager->update($id, $data);
+            }
+            else {
+                Session::addFlash('error','Action impossible');
+            }
+            $this->redirectTo("security", "viewProfile", $id);
         }
 
     }

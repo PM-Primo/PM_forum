@@ -33,4 +33,22 @@ $user = $result["data"]['user'];
         <li><?=$strTopics?></li>
         <li><?=$strPosts?></li>
     </ul>
+    <div class="changeRole">
+    <?php
+        if($user->getId() != \App\Session::getUser()->getId() && \App\Session::isAdmin()){
+            if($user->getRoleUser() != 'Banni'){
+                echo " <a href='index.php?ctrl=security&action=banUser&id=".$user->getId()."'>[Bannir]</a>&nbsp&nbsp&nbsp&nbsp";
+            }
+            else{
+                echo " <a href='index.php?ctrl=security&action=setUser&id=".$user->getId()."'>[Dé-bannir]</a>&nbsp&nbsp&nbsp&nbsp";
+            }
+            if($user->getRoleUser() != 'Admin'){
+                echo " <a href='index.php?ctrl=security&action=setAdmin&id=".$user->getId()."'>[Rendre Admin]</a>";
+            }
+            else{
+                echo " <a href='index.php?ctrl=security&action=setUser&id=".$user->getId()."'>[Retirer les fonctions Admin]</a>";
+            }
+        }
+    ?>
+    </div>
 </div>
