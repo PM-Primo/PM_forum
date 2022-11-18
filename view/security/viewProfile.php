@@ -7,7 +7,13 @@ $user = $result["data"]['user'];
 <div class="listProfil">
     <figure class="ppFigureProfil">
         <div class="ppImgBox">
-            <img src="<?=$user->getPpUser()?>" alt="photo de profil">
+            <a href="index.php?ctrl=security&action=changePPForm&id=<?=$user->getId()?>">
+                <img src="<?=$user->getPpUser()?>" alt="photo de profil">
+                <div class="changePP">
+                    <i class="fa-solid fa-image"></i>
+                    <p>Changer de photo de profil</p>
+                </div>
+            </a>
         </div>
     </figure>
     <ul class="detailsProfil">

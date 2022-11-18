@@ -278,5 +278,11 @@
             $this->redirectTo("security", "viewProfile", $id);
         }
 
+        public function changePPForm($id){
+            return [
+                "view" => VIEW_DIR."security/changePPForm.php",
+            ];
+        }
+
     }
 ?>

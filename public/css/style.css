@@ -262,15 +262,53 @@ h1 .fa-solid{
 
 .ppImgBox{
     overflow: hidden;
+    position: relative;
+    display: block;
 }
 
 .ppImgBox img {
     width: 100%;
+    display: block; /*pour enlever le petit espace en bas*/
     border-radius: 50%;
-    display: block; /*Pour ne pas avoir des petits espaces moches en bas des images*/
+}
+
+.changePP{
+    position: absolute;
+    display: block; /*J'ai toujours un petit espace en bas je sais pas pourquoi*/
+    top: 0;
+    left: 0;
+    width : 100%;
+    height : 100%;
+    background: rgba(0, 0, 0, 0.25);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity.4s, visibility .4s;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.fa-image{
+    font-size: 30pt;
+}
+  
+.ppImgBox:hover .changePP{
+    visibility: visible;
+    opacity: 1;
 }
 
 /*Il faudra faire un object-fit dans le cas où l'utilisateur importe une pp rectangulaire*/
+
+/*Change PP*/
+.ppUploader{
+    text-align: center;
+    margin: 20px 0 50px 0;
+
+}
 
 /*Footer*/
 footer{
