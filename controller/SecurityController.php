@@ -284,5 +284,41 @@
             ];
         }
 
+        public function changePP($id){
+            //On récupère les propriétés de l'image uploadée dans $_FILE et pas dans $_POST
+            $ppTmpName = $_FILES['nvPP']['tmp_name'];
+            $ppName = $_FILES['nvPP']['name'];
+            $ppSize = $_FILES['nvPP']['size'];
+            $ppError = $_FILES['nvPP']['error'];
+
+            //On vérifie que le fichier a bien une extension d'image
+            $tabExtension = explode('.', $ppName); //Découpe la chaîne $name à chaque '.' et renvoie un tableau avec chaque morceau de chaîne
+            $extension = strtolower(end($tabExtension)); //On prend le dernier élément du tableau (l'extension) et on met tout en minuscule pour ne pas dépendre de la casse
+            $extensionsValides = ['jpg', 'png', 'jpeg', 'gif'];
+
+            //On donne un nom unique au fichier uploadé pour éviter qu'il n'écrase un fichier du même nom dans le dossier
+            $uniqueName = uniqid('', true);
+            $ppName = $uniqueName.".".$extension;
+
+            //Définir un poids d'image max
+            $maxSize = 400000;
+           
+
+            if(in_array($extension, $extensionsValides) && $ppSize<$maxSize && $ppError==0){ //Si tout est rempli & que l'extension du fichier uploadé est dans les extensions valides
+            
+                move_uploaded_file($ppTmpName, './public/img/'.$ppName); //on définit le dossier dans lequel on va uploader les images
+
+                $userManager = new UserManager();
+                $ppPath = "public/img/".$ppName;
+                $data = ["ppUser" => $ppPath ];
+                $userManager->update($id, $data);
+
+            }
+
+
+            $this->redirectTo("security", "viewProfile", $id);
+
+        }
+
     }
 ?>

@@ -4,7 +4,7 @@
     <form action="index.php?ctrl=security&action=changePP&id=<?=$_GET["id"]?>" method="post" enctype= "multipart/form-data" class="formulaireNvPost">
         <p class="ppUploader">
             <label>
-                <input type="file" name="imageProduit" >
+                <input type="file" name="nvPP" >
             </label>
         </p>
 
