@@ -303,18 +303,26 @@
             //Définir un poids d'image max
             $maxSize = 400000;
            
+            if(\App\Session::getUser()){
+                if(\App\Session::getUser()->getId() == $id){
+                    if(in_array($extension, $extensionsValides) && $ppSize<$maxSize && $ppError==0){ //Si tout est rempli & que l'extension du fichier uploadé est dans les extensions valides
+                    
+                        move_uploaded_file($ppTmpName, './public/img/'.$ppName); //on définit le dossier dans lequel on va uploader les images
 
-            if(in_array($extension, $extensionsValides) && $ppSize<$maxSize && $ppError==0){ //Si tout est rempli & que l'extension du fichier uploadé est dans les extensions valides
-            
-                move_uploaded_file($ppTmpName, './public/img/'.$ppName); //on définit le dossier dans lequel on va uploader les images
+                        $userManager = new UserManager();
+                        $ppPath = "public/img/".$ppName;
+                        $data = ["ppUser" => $ppPath ];
+                        $userManager->update($id, $data);
 
-                $userManager = new UserManager();
-                $ppPath = "public/img/".$ppName;
-                $data = ["ppUser" => $ppPath ];
-                $userManager->update($id, $data);
-
+                    }
+                }
+                else{
+                    Session::addFlash('error','Action impossible');
+                }
             }
-
+            else{
+                Session::addFlash('error','Action impossible');
+            }
 
             $this->redirectTo("security", "viewProfile", $id);
 

@@ -7,13 +7,27 @@ $user = $result["data"]['user'];
 <div class="listProfil">
     <figure class="ppFigureProfil">
         <div class="ppImgBox">
-            <a href="index.php?ctrl=security&action=changePPForm&id=<?=$user->getId()?>">
+            <?php
+            if(\App\Session::getUser()){
+                if(\App\Session::getUser()->getId() == $user->getId()){ ?>
+                    <a href="index.php?ctrl=security&action=changePPForm&id=<?=$user->getId()?>">
+            <?php
+                    }
+                }
+                ?>
                 <img src="<?=$user->getPpUser()?>" alt="photo de profil">
-                <div class="changePP">
-                    <i class="fa-solid fa-image"></i>
-                    <p>Changer de photo de profil</p>
-                </div>
-            </a>
+                <?php
+                if(\App\Session::getUser()){
+                    if(\App\Session::getUser()->getId() == $user->getId()){ ?>
+                        <div class="changePP">
+                            <i class="fa-solid fa-image"></i>
+                            <p>Changer de photo de profil</p>
+                        </div>
+                        </a>
+                <?php
+                    }
+                }
+                ?>
         </div>
     </figure>
     <ul class="detailsProfil">
