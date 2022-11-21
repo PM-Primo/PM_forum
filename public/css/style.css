@@ -255,21 +255,29 @@ h1 .fa-solid{
 }
 
 .ppFigureProfil{
+}
+
+.ppImgBox{
     width:200px;
+    height:200px;
+    position: relative;
+    border-radius: 50%;
+    /* display: block; */
+    overflow: hidden;
     margin-top : -20px;
     margin-bottom: 40px;
 }
 
-.ppImgBox{
-    overflow: hidden;
-    position: relative;
-    display: block;
+.ppLien{
+    width:100%;
+    height:100%;
 }
 
 .ppImgBox img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block; /*pour enlever le petit espace en bas*/
-    border-radius: 50%;
 }
 
 .changePP{

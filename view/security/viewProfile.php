@@ -5,12 +5,12 @@ $user = $result["data"]['user'];
 <h1><?=$user->getPseudoUser()?></h1>
 
 <div class="listProfil">
-    <figure class="ppFigureProfil">
+    <!--<figure class="ppFigureProfil">-->
         <div class="ppImgBox">
             <?php
             if(\App\Session::getUser()){
                 if(\App\Session::getUser()->getId() == $user->getId()){ ?>
-                    <a href="index.php?ctrl=security&action=changePPForm&id=<?=$user->getId()?>">
+                    <a href="index.php?ctrl=security&action=changePPForm&id=<?=$user->getId()?>" class="ppLien">
             <?php
                     }
                 }
@@ -29,7 +29,7 @@ $user = $result["data"]['user'];
                 }
                 ?>
         </div>
-    </figure>
+    <!--</figure>-->
     <ul class="detailsProfil">
         <li>Pseudo : <?=$user->getPseudoUser()?></li>
         <li>Adresse mail : <?=$user->getEmailUser()?></li>
